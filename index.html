@@ -1,0 +1,3416 @@
+<!DOCTYPE html>
+<html lang="fr"  ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Ashes - Liste des cartes</title>
+        <style>
+            .P{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAASKSURBVFhHzZhXiC1FEIZXUTGBYMCEGcWIAUUMFwyYFcwZAxgQDC9iAtODCcWsiIqK+iAqXhSzGC4oKmLAjAEzBgyYUEzr9805tbdOn545e3Zf7g/f7lR1z0ztTHdVzU5MTk4ucPR+zE4bwVXwAdwNW8OMNdugDoBHwQuUPAtHwGIwlmYS1BpwLnwGEcAvcGf/91z4HGLsO7gI1oVpaZygdgBvHDeT9+E0WBy2gn9gf1AnwmuQ5z8Ae0GnRgW1DBwOL0O++GNwCGTdC4591FjztTc8CPn8N+EYWAGG1BXUUvAtxIW+gUtgHSi1KPwMMXdjKLUqnA2fQMzznOVhQF1B7QcOfAmHwULQpu0hbiTHQpd8xR+Ccy/QkdUV1OvgwD6N1a1Lwbkuan8/DqO0JTj3x8ZKagtqC9D5e2P1ZC7apHc4pHfA+T5dn6zHvtJSq8OmvcNGsUt3b6y+2oK6B3Re0Vg9GZC+5+AU2BbUwqD/r8aamHgItCOBuitPgshn+0LInavPnDalWlDLgg4pd8czEGPydvK5w5RrRPsNeLV/HPwAWUvAv+DYWjpULahzQMeLjTUoM7RjNY4H5SuqjcvFUOpWcOzGxkK1oGKx1ha42dyxGnlrvwS1OZtBqQ3AMV//IjrKoPYEDRdgmywjzsmcAVmxszLPQ5tipzeppAzKEzVObaxhmeFvAecElp6ajoI8zw1SS6rqQHCOZWsgKBeaB/9pJK0ER8N94HhgunD9dcl6+Qrk83wqFvQNIesncHzzHNRNfadpYGmwNvmq/gT9gbvNLb4iTFe7wg3wKeRr+WbOhFUgNtjcHNRvfedd8Hf/OOMuqRbQMXUdlNcW79sc56BsKzy4HaxlF8JXfZ/YljwF9kbrwTgyY98Gb0FcTyzO58EciFI1LwdlGfEg1yK7xp3hMvgCHA+eAIPv0qFQ9lSWJF+VgeQi/zE4PicHpSIDH9dYw9oOyvbXhFrT+ZDnPQJttTNSkWuuF08Kyp5bww+ANvlh4JyMeSnL+lbOeRra9AI452SNMigVzdpOjTUod4ljJWW3Wb7qoEwDam2I8SV11IJyIetw65eKJFcjugZzU21cfKWlrgHH7mgsVAsqPw0zeFbs0MAnEu2tF1fuXm0XbpmXyidqrfsDHFtfh6oFpZ4EnWc1Vk9rgj5vdDO4s+yloqBGvbRl0Y5e3sbvenCd6jeRhqwU+jxnSm1B7Qg6/XAImTJ8fTXFB4afVZapsm8KucvcwaH3wPMObqy+2oJS0dgb4ChdC84NroRRiidsJRlQV1B+7zlgcLvo6JCJ0LnBbtAl5/vt59zLdWR1BeUij0Uotr6nw3JQysz8PcTc2hy/I+1OcwPoq14ZBtQVlFoNrE3xhSL21HYUZcKMXXd/Y82XPdTV8CvENVxz1rrq/xdGBZV1EDwMcWGZB0eC8i82YNeKclP4eZ/n26rYEnX+J2acoEL22f7lNnlxM9OEn/Q+Ubd/rBfxFflkt4FpaSZBhWwET4CyCwjeBdvqof8VjNJsgsqytNikfQ1+jO4BM9ZUUAsWkxP/A8HTYr0EtOkvAAAAAElFTkSuQmCC');
+            }
+            .S{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAKlSURBVFhHrZZNqIxRHIdfQmJBSEmElHyFWKEsfFw7uQtZWCklNsRGuAtJIRGxkJWVBSUiWViQkijKtwUbIko2LHyM5zl3Xk7XzJ13znueepr5n5nzf38z78c5RaPRKDKxESf2v00n5MkUajQ+xCWhqkHOUIvQRltCVYOcobahjc6FqgY5Q11BG33BMQ6kkivUZPyJNtJVmEyuUOuxDKTHMZlcoc6gTX40X+9jMrlCPUGbnMT3zfdLMYkcoVagDXQK3mi+341J5Ai1B23wIFRFcRitb4cqgRyhPLgNToWqKFai9S9MWnLqhpqGTta1DjR5i475QO2auqEuopMfheofB9Bx/63ZDnRDnVBn0Yna60DECHyJfvYBF2Nlug01FbdieXq0D1sxF8vnll7CHhyOg1Il1Hz0wOWzKLbTjmAS3sV4zne8gK4CI/E/2oWag97q7o/ihvoGj6DrXVW8Cbz+DBT3+oheBmtwGAbiUD6B7znWwju4DEdhXcZjfD3G+oN741DuGC/jZ4y/qIZajh2vhw7MRE/bVRx4DP81V4OeOFTMAjyErzCeqAb0WqoacBzuwxc4sNdTPIgL8S/tQsXMwr34DuOG39BrYTA2YTxHH+N29E5uSZVQMZ7iY/gVy4NswFZsxvI7/qAdOB070m2okrEY3xTzMMaHZfnZdRyKlUkNVeJmzsnuz2MM4njSTqFuqHgvNcMBcE9Vjvl519QNJc/RBvtDVRS70Pp1qBLIEeoo2uBWqPrXOOvToUogRyiXEBt4R/rULxfrdndlR3KEkmdok5vN10/YcrGtQq5QboVtUnoek8kVajXGoXySJ5MrlLsHT5mNfmPbJaQKuULJCbTRtVDVIGeodWgjF9ta5Aw1AT2F7rtqkTPUENyJ7str0Wg0ij+w4qMFRRMnHAAAAABJRU5ErkJggg==');
+            }
+            .B{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAL5SURBVFhHzZdbqA1RHMa3JOWaF0QiXoWQ3HJJSgmF8KZcSt6UB+nwJrk7D+JBLsetyIvkCQm55ElELk9yCQ/u5Lr9vtnzP60zZ82eNTO79vnqd86sb9b852vPmjVrVarVapfDazYbr9lsan/Kqxu0wMioVUKNDLUCVGhb1CqhRoZ6DCr0HYbJKKpGhdJjUxHjGBRWI0KNgt/ghhILoJAaEeoCuGGM+1BIZUOtAl38GT7Ex9/gU3y8E3KrbKglsLB2WDkKKnQzalUqU2EtdI9aOVQ2lKvjoEK3o1YJlQ3VC1aDfqW3oEJf4SSsgT6QW0VD9YY98BN0cRq/YD/0hWAVCTUTNLDdm2ehwT8XgpQ31CJwbyYOwgA4E7c1pobDbvgbe8ZyyFSeUGPAvYnesoFgOgHy70StmhT2Ctg1YhLUVZ5QupkVPi8joVOgc3ejVkfZOZE5qYaGshWAeA49IKl6oaQHYDX0xqYqNNRlsIJLZXiUFUrfQqvhPuJOCgnVDz6COr2HtLknK5Rm9hegPppKBoFXIaFGgzoI31gyZYWSToPVmiDDp5BQU8AKHZGRopBQB8BqzZbhU0io8WCFdOM0hYQ6DFZLH2yvQkINhT+gTo9kpCgk1D1QHzFCBtJY06ajXWmhBoM+qKaHYMWmyfAoK9REsBrPZMTaDB3GV1qoLSDT5iNri7MyPMoK1QZWY4eMWGqfqx3W5AvVH7T8kDlPBtK08A7kiY2QVL1Q68Gu1arUPk8zwPyxMiRfqL1gHa/JiLUOzBcbwJXWUPKToepddwnMvyhDSoYaB9bJWAkmN7DQwJ0OkqYLeTeiVm2c3AK3/yEwLQP3nJDXKdR1cDsJLdTcrbjGQ7LPK7DHq8fzOj52aQXTEPgCyT4voacbKrmhdPkHs8A0B96Ar28SfZrmg2ky1FuxtrmhtoPeLC3O9jlom6QP8lZISjsZ7fuegH6hH/H/p6AxshiS2gRXYRdoONh9tLzWG9raHqqr4TWbjddsNl6zuVQr/wHXRuHbW+T/HwAAAABJRU5ErkJggg==');
+            }
+            .CE{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAOjSURBVFhHzZhpiE1hGMfHFoksHwiRSDSZkuWLZEnxyZJQIlFCWSJCPglZyi6UsWYrWSKSD1K2byRLEcaULSShGEOu/++4z+29d95zzjv3Tplf/Wbu+5znvOeZ23m3KctkMo3Ofz/8dJML5RX5WX6Xb+RJOVu2kkk0kdPlUVktuf+LvCaXyd6yDklFrZG1kotxvpVzpI+pskr67nPdIZvJHL6i+OtvS7vpo9wvF8jxcrnkm/ojLeeAdNks7RqelavlBDlP7pOvpF1/KDvJCF9Rd6Ulr5NtpI8e8pS0XB4ES6XFLsu+0kdzuUJa7stsrE5R26QlzSIQwExp39pO+Sv7eaUMYay0Z54g4BbFS20XeZ9CmSR/S7vX7aO1DGG+tPvK3aLWZ4PvaARyUVpnyOhy37X3sr8M4Ynknkq3qJvZIO9RCKcl+bhLVsgOsrucK5lCuPZNtpdpLJHkV7lFWScTaaQwTJKLjEofPaVNKZUEUhgiya1xi+IHjqGRwnFJ7vWoFQ/fGHk/ZUsCCfSTUQ1uUV+zwXE0EmCWfi7JnUIgAQqx0TiKQAKDJHm1blE2YaaNPGZfXuiQBwGTL7kzolY8iyR51W5RG7PB1zRSeCbJnRa14mFKsG9qOIEEHknyDrpFMUPzAVcRSIAFlrw7USseG1E1MpqtY2Bxt2dXuEXBbmkXk174gdLy4qaQodLmrE0EYiiX1tcZAoVFgX2NdNiVQAxbpXXGGscAYQQNlvYqIDuFvF2AQ1v5SZLHligaob6i2kn2PAQZZUnskeTFyeKeW/093JPkMZ/x+kT4igKbyPAcgQQmyxvS8vGFZNlKgu2O5ee9KnFFASPLbgpZoA9JcvmdBquA9c32JY+komCLtJvT5hl7x9LWTr4V6/MIgULSioJL0joZTSCGvZKc7VHLD3ty64vJ2ktIUfBUkvRDdiTgIa2oFpIRRg5bmti1MLSoztKWlscEPKQVdUtyHfsQiCO0KBggbTI8T6CApKJsECDb30TqUxRwGrHONxBwiCuK853ds5hAGvUtCjin2UOYowxfUSOk5R4jEEIxRQGbO3sYSwvYZMgsD10kA4PYfQKhFFtUU8kxnBs/EBC2I+A3MKvTZm1j6Qqm2KKAtcqOVoelnYrZrK3NfsbQ00yOUoqCkdIebnJ6sc+cCetNqUWBHQ4K5X8HRdEQRQHHdbeg6PhdLA1VFFyVdPQgapVAQxbF7vKC7BW1SiBXVGPTG/y/Zsr+AmS3WYh8KID9AAAAAElFTkSuQmCC');
+            }
+            .CI{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAQNSURBVFhHzZhZqFVlFMd3FmGDgYgpmYoIoiWa2UhUEhkOqBgmjgghJmoPUTQR0UNUD0EhUW+JDz4UCYL6IA7RdSKaoHprJhpuScO9mVba9fe796x7zzl3nfE+6B9+sPfa395rne98a31r76Knp+eCIzfW1nXwGByEH+BP+B1+K+FxF3TCcXgebodLYJAy35IbB+t6eBV06AD5H7ohAhGDlDMQ4zx+B+6BCmW+JTdWah78AeHkU3gRFsItMBtuLXEz3AT3wjPQAScggtsC/cp8S24c0P3wL2j8BjbCSGhFS+Ak+Ax5FnqV+Zbc2CfXgmtDw8dwA7Sia+BJOAwRULAWUt+SG4viUtjhfeAMTYdWtApMhAjiE9gE+0rnH8G4zLfkxqKYW7pZHtLQpK6CN8Ek8N6v4Alw1tRd8Bd47ZHMt+TGonitdKO/cLSGJjQB9oP3yV6YDNV6G7zekfmW3NiXYR684EkTciY+AO+Rx6GWloNjfsx8S24cWOCrPWkg/7JYK6dhHdSTJcRC25X5ltw4ENQDnjTQS+BYeVhDA5k0v0B35ltyI1MLHqz0pI7ug6hBbimhi2ASWFyr69oM+BVanqmfwQMLXy1dBu+B49znIiEMyGrubJtpB+BuCLUdVNQYi98UuKMKs+ppcIwsgtBmCHvwBZidqu2gvgQPzkL55hpoi+3HImuxVaMgq+D/wApQbQdl0fPADuA7cGH6IPkWIhFkKYQuh90Q1wL/xsWg2g4qFvp6GAbWIbkargSrtNc/h3FQrvlwCrweGGgs+LaD+gk8sEuo1nB4C7xuC5PJducoOMsvw1gIDXmmspLgjMWas6eqJbPTNeZMl2vIQbnbV8ts/Btcd5FRrWgm2Pi1/fct86RKtrVe+x7cUiwH9keuvw1wLdSTrXVvDct8S27syzYPsm3GghqtSTUu8HoFV7W990XxdOefqKFMN8IhsP/2rcYW5V1wvPWoXlAmyU5wbGfmW3JjUTwFUTS/htsgdDGY3iPgCg3IVy//kv9ggYZE/rgj4DNla+ZbcmOfHgSnWYMLv97m7OJ3TK2g7Pc/A5/lLvEcpL4lNw7IXT4y0XXkXpip3kytAUuAz7Cye96rzLfkxkpNhffBC/IGuDbKVR5Uee1yRuI+f5ybeb8y35IbB2sMbIdwsAfKE8CgzFiz704N6HWI8SaCpaBCmW/Jjbn8HuCWEY5cI86imgYWRGdrDsSLh2wD98xBynxLbqyvRyE2XDuGWWBGGqQZa6W3NHj9FUg/bqjMt+TGxrJdsa1xsPugvfmHpXPxw0fFd4NMmW/Jjc3JNWJHGYFE02cZ8QNHQ2W+JTc2r/Hgoo/AnK2mvzlkviU3tibf+3bBMWipa8h8S2o836TG80tPcQ62nOx0xgDjGAAAAABJRU5ErkJggg==');
+            }
+            .CN{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAPYSURBVFhHzddLiJV1HMZxzUwkCEpILNtIahJFiNhCMMmUENJovOXCwkC8ghmiLQJDt4KBqzLpAuJCwkVItggHURBvKFYQRJZJo85C1KwsHZ+v/J/h75nnHM9xYw98mHN+7zvn98573v9lBvX19f3vxCLazGB5S47Lb7Jehsldk3paLKKNzJQfhJNrPbJKHpCmST0tFtEiD8kO8UWclUvyn/SWGg7KExKTelosokmek5PixuvkSfmjvH9F5si58v6CzJUBST0tFhEySWjCwTPlPXlMrgn11ygoI+Q7oYbVckdST4tFNOR58Vfzk3B3HL6iP4Vj9V15UL4W6uiS/qSeFouowgjj+aB4Sh6ROvVF3dG45HPh2K/yOAWSelososqHQgEMe56bOq0u6hnZL/79fXI7qafFIkomyFWhcLn8xFYZLoSv0s/UfAoly+Rfoe7PwNsSe1osouRj4c1R4QI/Ke9xWp4Vnh2mBGo8/A/LN+U9jslY+ai8PySxp8UilHHiv3A5hZJZ8rtQ5w5xoXytN+QL8bF/ZKXwTJJ5Qh1dqafFIhSWD17clCkUqjDkvxI3aXREmNPqDJXvhePbU0+LRSgeNaxrzfK6+CEHd+sDGSIp/szTqafFIpQT5QNYUlrlJeE8rKDQIouE83pST4tFKF46eF4mUmiSR+WKcG7jdFFntBwQzutNPS0WoVwsH4C/hW1JSj1P8TCnvCpeD3HPd8oX9YtwUbzmL31B6rSaPEfJZ8IxcNf5eSH1tFiE8nP5AHYCL4svDO+Lw+SZ7tSb4q8Va2VaeX3PXx9LAi+8NDAB1is/A2GMMNJ8UZOFob+zvAdr3lQhm4TamdTTYhHKxvIBbOJGUijh2aKO88KI813lGDO4j38q9QL+rVDvTj0tFqHUQ52hXIeJca/4uNc4+1G8t3JeFJ+3MvW0WESJV3j+4hSWn+vCOcYal/554NnkOM/ZuNTTYhElS8XNGpcah0Hgc96lEMLulFHMOSzysafFIqr4OTgs/NPQmHrynE4hZItwnN3r0xRST4tFVBkv3i/totAQdpMefayFjVkjHMNCCiT1tFhEQ5hj/MGbKVRpdafeEf8ek2h/Uk+LRYRsFw4wie4RVnwasYXxqOoWFvAvhbvqi2Vjx3anP6mnxSKaZINwsBO7ZcBoTD0tFtEiM4Svk+lgibwnXoK2yWLhGCNxgbBdHpDU02IRHaR+ppge2krqabGIDlLvEuK/6Cmpp8UiOgjbE/+D8QaFdpJ6Wiyigzwl7M35pf556G5JPS0W0UG4U+wk/pLZFNpJ6mmxeL/F4v3VN+gWJ+GpGVq6Bp8AAAAASUVORK5CYII=');
+            }
+            .CR{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAANVSURBVFhHzdhfiFRlGMfxDcXUBDMVxdoMUkIU/9wEmqRJJoh/QkQLErwRCZL1wghTUEK8EPNCvTAM0/JCResiNehGUCNc0yT8Q0JdqHkhVkqmJdr0/brzrK+z5+zOzow7+4OPc+aZ95x59sw57znHhkKh0O1kFuut5Z+uz5OYjDXYg7/xDurS1CvYjVvwi1Or0aVNTcE5pE3cx15cKL7/Bl3SVG98hWhE32ERzLO4C+sXLTzupl7CdUQzxzEGaU4hPv8PjbVo6onia2nGIvaAP9NbKM16RENhTi2aOoi1LYuteRpX4YZ9fQFZcU9+j2hITdU2tRCxsUPoBbML1m7gOQsdZA5iOzurbcqDOP0JfsOnyfs30FHGYxPuwXXOV9tUZBR+RjSjrWgvQ3EU6TpqrlVTxr12BbFxl2ciK9ZjnHbA2X0wWvqpUVNL4YZu41JxWfvQE5G3EZ+dhvPUI6lVU+MQX7TKAtmOqP2JFzE6qR1AZmrVVDPcyE9I560ZiGvcX7A5l79AbmrR1EdwA3LCLI3H2ieIMXoTuam2qamIL2qykJNZiHFhIzJTTVN9EAf0fgs5GQ4PfsdtwLrispztX8cjqaYpT2NXdNYeYiEn38Jx3rZEXkNMln/Ay1JrKm0qvby4nJfliHGTLBQzElFfYSFNJU0Ng3vHlT6zkJP09Pcni/RAzP5eL9ukkqZ+gCtcRj8LOfkRjjvx4N3DbIH1O2i0UJrONuUB7WC1OUCTfI0Y5x6LzEbUF1vISrlN9UXsIS1BVvrjJGLcfESeQlwbfXrJTTlNvQzPkPiirL/Qpn0S8Q4zxi1Ams9h/RqesZCX9pryucwnjfiS4A3cSnyAzTiD9HMP4hFI8y7i8+kW2ktWU949envrgRgb8qA+krzP4pisvTgNMeZjCx0lbWouvN/2whkbkU8bz8M4O7+HbXCPOYF+iAnISnoZOmahnKRNee2KDYT3UWnSifNXeBKUlbQpMwDp6ew9t/PKqyg3PpZ78xbb+AWDUHZKm4pMRDoFyDPQG7Nl8FR3nvLn8dbW/5iweY+rdB1nbGfwTiWvqYh/9WGkX1QOT/t5qCgdNRUZCCdMpwingN/xL/4pvt7EWXyJ0vmp02ltqrvJLNZbZrG+Cg3/A7WLCtCqLoAeAAAAAElFTkSuQmCC');
+            }
+            .D{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAMuSURBVFhHzZjLq01RHMdvQpI8ZrfIm4FXBjIRkSJvYXb9AaTMjETcGblFkYyM1OUqJSUpxUAiievKI4WJvAber8Hx/dyzf6ff2Wevc9Y6d6v7rc89e6291zqfux9rr3U6KpXKsKP6p9wcFx/FL9ErJono/A+pO4IOPS/EeBGVsqVuCRPZJlaJd1k5WqxMqevChFZQkWWK+CyixcqSCglZ5gvuryixMqS80FoqAlkkosSGKuWFNlPRIl7suRglGjIUqVQhixe7L0aKurQrdVmY0DoqErNA2FP5QEwQtbQj5c/QcirazFTxU9APl7ImlipVlpBloWgQS5HyQuupKMhq0VndjI4XeypGx0p5oU1UBHJBvKpuJgWxt4L+98ZIxQqRU4LjaJOaQ4K2fa2k+gQ7oZUQ4fLZ8SliE8VjQbv9zaRShSwbhbWLEUOIEZ7jv1AOSXmhLVQkJlaMeZYJfRfzRNUnJ3VFWIc7qGgz/lJepSIXztBrwf4PYo4YTF7K39Qpr45Qlgnr7xoVWRB6KahHiOlNLV7qMOWMMoQsXozbgsf/WVZ+L+qEiJeyl2QXhZKzQdC3h3cfr5qGeCk7eAaFNrNLrKluNoSzb9/xW8wSPgfFNDa81A3KgvEiepKfy0VBH4VnQPFiZ6nIwoqHutkUvBQV0VPWQI4I2gcvjeLFjoluV14i6qRI9JQ1kLnC5kmxYh4uf4MUQeyroJLpxBiREp6mh4L2iM0URfFij7LPk6JQitCR/cdPRN3MMCLcxH8F7b9l5aLsFtsFDwfHXhJBKcKpN7G6mWGLMDDeFrQz6KdhPHKxIeMNhWZSBLHCKWsg44S9y7gFtoq7WbmZ2HTBMdDZSooUTlkLMkLYvfRDDL5clbHClvOfxEpRFFtFL46RIq3EELon2I8QK2KfHsE+CM06+gX7u2KliBcbELZe80KM1Hkhm1ECl5IFB5eRdj4nBMf0pEgRL8ZCck/2SRmWCp8Dwvbl4fcr2p4X+4TN4XpTpQhiNo4Zf0TRkosfO3jc+dLTgrmazaFCDLQjRXhxnhF8CYuF0DgUymTBK2WnOCrOiZuCJ7e/JjW8qHT8A8HP2LNz/B9qAAAAAElFTkSuQmCC');
+            }
+            .E{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAPASURBVFhHzZdZqFVVGIA3mJah0GBYDw6VFGFUaFgSIkgUQb1ENBIVWpRENBCiNlGJQwMRFQUVFUFSFNFEJQ0oglpUTz2kFiaiKQ5k2dzt+9ZZvy2O+14952y5fvDdu/9/r73Of/baa619qr6+vkPO2uRg2/pTVTehBz/jr/m43d9wF9om3I1/YtnuL/wFy3ZeN1C/O/Px/LKow/D7fMKL7dRj9aLv8v/IdePfuA79IpHzsyK28FFlUXINxsljTRTMQzv1vG7CJ/AKPAdtPwyPwkl4GS7GHzCu0cexZCiuRc/dbqK9KFmNJhakqKqOwGVoTj0/AzvhXPwUyz5GoVyP5tanCOqKuhhN+A0vx805duiuxF6YjlvQ/vbgVfhljq/FRF1RshRNhh+jQ9MUb2DZ/0e4l/6KugvjgsdMHAR8RuMzHjIR1BV1HkZj9WE9GJRfXC/BRHtRzqCf0MRy3J6PJ2OTjEf7/QPfz8eubSfjPkW9iwYWJI+g8Vspao7n0X5fSVFVvYnGKwzKomYao6uz30TGoDl1ibgB7+jBWXgvRp9nobi2xQjNKYv6JicfNihYhOab1rtVciea31AW9WBOurq6YAbHYOxLDqt3670c2/ZmdOswDrfibFyT48/xOoyl4F9Mz0/BKvTc02VR8gUauE6VzEHzn6Woqk5EY/ctcZjL/SwmRuylzmh5GY3bl5mn0Lyr+tD2oiaigS40kXHhdK8zf7UJiEnxSYpajMz/Je7KyhRV1flo/DseZyLjHTWvqfj2osSlPxr5YAYxEX5MUevhjLtjwW7Mh+OFGBusTkCJobwvRS3ctKPdbSakrii5BaNx2cmHaO6eFFXVaPwao22pQxHPTbyrbUhRi/IOzTUR9FeU3Ihx0asm4Aw0dtGLXV4uwBfwHbTtpRj4ahJDf5EJiGdIHzBRMlBRUg6lwzYWn83xo3ggxCRxAR6BMYzqzN2H/RUlp+FGtJELXMzQf/AkHIijcQfa/iuMfsxNxVoOpKgg1rHSD3AKHo8lDq1vn7F9lD6DQ7BfOilK/LAn0WldfpCa8zW67px39UUch/ul06JKYh3yl0q8TYbb0AI99lW6I3opKlZ1nWYCTs3/z8Q4d7aJTuilKFmCXvx2iv7nOTT/Uoo6pNeifCn0B4Ad+INDyrt0iolO6bUomY92EHvca2jsb8KuaKKo4RgPugtrzL4TsCuaKEpuRTsJ78euaaoo+RbtyGes67skTRblm6Ud3Z2iHmiyqCPxdTw9RT2wt6hDzdrkYFubHFz7qv8Al19kxVAiAvMAAAAASUVORK5CYII=');
+            }
+            .PE{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAOOSURBVFhHxZhLqE1RGMdP5B0GHgOJIpGJRx4l7kAZeD8iES7lPTGRmREDA5JkYKAYIpE8IgN5hrwiyvvRTRjcvO8Dx/+3O99p3X3XXntt7s2/frXX2t/a53/WWnt93zmlcrlcitRY8Ukw4FsOXwVxq0UhJX4iTY0RjYLgImwUhRRraqJoEgS+FovFfLHUw0IxV7wQxG8QhRRjarwgAFiWkSJGV0S7mHKX7LuINYRuiTY35S5ZvRgqishMrUlaBZRlyl0yDA0SafUXS8QM0ZmOlG4Kxu8X48SCFCvFKNFKPlOxSzZLEPNT9KMjpRuC+yF+CyaghdKmiizZTEFcs+hLR0pm6r14IJ44PBQ8n/tQI6pyTcUsmSuWjdgsU7an1iet1hom7CD+JZiQRK6pOtrio4jZ1NMF8Xmm1iYtvwYKPo84mCpamLK0wAaM0RFBPPvPt6fMFMvYlY4MYeyDIBZqXFMcjFzwRuXpkrCHHKbDo63CYl6JPiJL7lLW+UyRKrLEMj0SxMFuEdI6YbFfBG92lqYJ4hqKmromiIHNdERonrAxb0QH4RNnGTHNRU2RjInZkrTiNVswjv3Xkw6PJghimoqa4psSw4cU0WDBOGhzUy8FMRfFMhHavKiLoMQ5Khj3Q7S5KauRXLKWkjTEGebGfhbtNlP3xIXKNewVrjgw7d5Vwcxy3S6m7ghieL0XiU2VNqwQiNfe+nYK8trzSvud8FUU6K9NsYeeCeJgjthRub4r0AFB+4SYIiyNUHGEzqmgqbwTvbuwGSNxn6xcs3+WCyoA2peFzRCVwhARkvecstxny5Cns4L4PB4LCsI8TRbEN7qmbJr5ViTJGLHBGZPFOREjEvZ9wZh61xQb0h72Vvgyf1qdxHDB5j0oGHte9BIjRDcRI7dKrXVNIeoZuxlrzLRLMI6DMlYdxXVhn5nUXmlT6JSwoCJLScXAmGNJK1/ukkH1rc8zBbEztkcQfzxphUWlYL92oFZU5TN1WtBxSNg34SUYIEKixt4ukpI2IPafd4ZMPlNnBB38J4Ao6mkXWcosZS6Zq5Ap/sKxatAgTeT9yslSD2GHLrRYMlc+U7Z8LJnNEinjaeWaQo/jg5RBGsmD9DFa3BaMh1AqC5oytgmECTP5LwQNIZ8pN32sosPRJEH5wT1K24ZI7Hnkxlz5TNmPA6bdJzZrb0FdFAvxJPIo+UztE/wk/28ql8ulP5NmfSDm4rPHAAAAAElFTkSuQmCC');
+            }
+            .PI{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAQoSURBVFhHvZh5yKVTHMdfyh4pYkoYf0iWstXYCdnKVkKZlIxiZgziD2u2v8i+hpBE1ixFZrJEJAYplH2XULKT9fp8juf3+r33nvs8973vzHzr033O7yz3+z7vOb9zzp3o9XoTLdoZHoE1SmnZ6FY46r/HQRU/HabuBxvcWUoz19ngeK+XUkVdpvYDK4PLYCY6CfJ4p8GAukw9AFb+03zKmTCODoMY46/m8w0YUJup9eE3sPIUuKV5lsNhOtoGou8zcHQqbwdT1GZqV4iOGxtAb0LE9jIwgjaFb8E+38M6oH4HYyeWUlKbqePAil9hXQNoI/gGjP8Cm0ObXLFvg+1lFwi9CMZuKqWkNlPngBWfw8oGGq0HYcw3dy48Bi/Dq7AUnobz4XmwnWwPWfYx/ngpJbWZWgBW+OpXN4BWgYPhM7BuVH6C42FtCC0B6+4qpaQ2U/tCDOrb2QG+SzFxXjwHd8B1cDlcA7fBYvgRcns5FtTHYPmsUkpqM7UZxED+m/5onv28HfaGNaFNvtk5oNkfIMZ7F/5snneDKWozpfxrYyB5FGbBOFoLboQ83kcwoC5TL0EMcIGBZaBjIMb8CpwaU9Rm6gmIzvIBmBJmopXgKcjjfgixkIqGmToVDJqjroRIAU70A2EcbQvvgePIFfB+83w9TKpmagNwCRu81ADKr1xegCMhkuowrQb7g0ef3P8iUHMhYrsbUDVTriwDJs1VDTSaDU9CDBLYvqZF0N/2LdgJsky01ploi/pN+cUxwHwDFe0InrFiSb8CNZmvYiwT5QFQ054Q7fYx0G/K/7OFT8BJ2aZ5YFu3lpquAusvLqV2RXb3c8CUecOC+5h7mivwHrgXjoAstw3bdpm6sJT+l6ePuxs0cV7zaVvPbbOzqbyt9OOyjeNLaFxTTv7+tJCZl03FqUD8Io34bILzX+mWcijEbu8eFm1rClO+CbUVePp03ipXsPVfg0n676Z8XzZlhQMpO3ogs+ILiHwSfAmfNs8eVWoKU/aPaRG4snNsD1CecJdmU1GhHobo0IXzr6YwNQr5rL5lNhXyiBKN/Wu8cZgAPTVq3MwcFwoZ9qauhtzG04KT3CTp0j8BXoNo402nqGbqBjAw7LLobp/3xWFvyu0p2ngk3gRq0qRtJk+gNVOeOF2JNS2E+CJ5B7aGmrwNeXPJ7b0R1bQF+OaKaqbalLO05kfRQeAlwz6uuE5N11RM3odKaXR55LXf5P7WpnFNPVhKo8tb9Qo15Yo6A8zwwelQNtdGK8RU/vfdDMb6MdeF4peW5WIqT3RPCcqrVcQy5jKVjybLZaLHfhecDB5Nciy4Fg7pi10CnZquKWV2j59yvAP+3Dz34z0vUoFMZuwujWNKbQheKOML29CcW9fIGtdUyN8B7Ozb8ooexMXjWYiffkZWr9eb+Bf27JJySICERAAAAABJRU5ErkJggg==');
+            }
+            .PN{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAANJSURBVFhHzZddqFRVGIaPkJkFemdihuSFYCAogYhoBFr+XEQYIiYiJEIKJv6AiDdWN2VXpqJIEJJ1kYhg6YWRoiKYWiEqSpQYUWoXahr5k3Z8nn32J2uGvWfmzMxhzgvPmVnvWnvtd/Zef6eru7u731FodppCs9MUmp2m50/79QLsAzuXozAe6qqvQo2F+2DHd+FO/l2mQU31Vaj9YKc7slKP3gO962D9d3Ao4SLMhD4JNQLs8GZWqpQ3t66Mt6GtoSbBbvgf7PAHqNYesO5jmA0LYR5chraGmg4XwE7EMRTfZ0HIQa73EIZoJDoO1rUcahycAS8Wx8r7oN6C8D+DzfBvXo42qU6DdU2HGgzpVP8ZfFrV8tVEm2ANFOkUWN9UqMkQr8dp7hOppaHwCrgMDNMo0QloKtRKsKH4pAZCu3QO7HeBhUZDfQIRaIVGk/KHLIYDcB6+hGXwN9j3DGgo1BaIQIs0mtSLcAWir2ocFs9C3VDrIS56TaNJPQe3wH7+AZ/8UvgAfgd9Z2CmWqEcnFbIyxot6HOwn2vwvEaiw2CdDyBTWaiRcAOscE/aAAfBDnbBm9CohoP9yOsaieaAvruA98xUFmovREdl+KunQj1NBNs7mJ/UyOVy8SdY95FGqCiUW4NG4Eq9FZw1yyFOAMESqKWXwHaua89o5DoC+r9AxfJSFCrdyTdpFMhH/SNEu1ehTD6RGORzNdBJiGsNXaHqUK6+0fhDjTr6Hmx7NiuVy73Pds60X/Pvkp2fqlUdaidY8GaNaALEDRy0ZXK/vATR9i/I1qQipaEGgYPXgqtso4ox9gWMginwFFTLvS/OTQ760VCoNFTMEhmj0aA2QlwXfApFcqD/BNGucGlJQ622DG6OvdG74DrjQc9X9ADsx1NomY6BbSQ7GaRKQ223DL6G3mhA/hl6B+KGX2uU6FuIdhXDJQ31jWVYa6FFpcG8eZnSw+IqDZWGinfdykkg1RsQN/R1lWkbRLt1Gmmo25ZhvgXkDGoGp/8ToNwF4oYuM0+DinahryDabUhDxarbLhzwLgH3Eq8IN/7fkvKtNNQfuflf/tkuPD/5j6k/2n+vitr4A+L0efVxqP5GodlpCs1OU2h2lu6uR6+JZ8WbyaecAAAAAElFTkSuQmCC');
+            }
+            .PR{
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAALiIAAC4iAari3ZIAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuOWwzfk4AAAOUSURBVFhHzZhJqE5hGMc/8xRCom7msrAlGyUSCzMLxdaCkIWyU7fEipKiLFhgIyJhIWOGZLpChmtjLpnn6Ro+/98557mee+45557zfV/d+6/f/c77vM953//3nXc6t1Qulzsc4Z+W6itWi8+iURwQW8Us0UlUos5iutgiaO+e+CjWiH6iWWmmTPMElZ4msVYUEfncF29rjmiltkyhqYKEa2KB+BCVG8RgkSXqbwjyv4r54lJUniISlccUOiJIGheUSqUTgvJD0Y1AgrqLx4I88nnsA6LyUZGqvKYmC5IuBqVQzwWx9UGpteoF9U+CUqhDgti0oJSivKYGCZJeBKVQswWxN0Gptd4K6hmXpmeCGBMpVXlN9RIkMViZRair+CaIHxT7xP7ok8dD/L0w9RTEfgelDOU1hQGSvgel/7JBm8YV4UXsT3iZLm+Kb8Ivwqenh5ggSOLx+bpH4q+YIRgnBlOdfMaT5dL2S0F8oqBd3xb05tObYuDaOChKkpLy2oL+G70pq7grzokLjrOCcXPYxYClYoewcWbiV9krqPf53E87p10M6O+moP8mb+p8FJxJoR3EFkb/Dd7Uxih4h0I76L6g/w3eVF0UhMuC7SVtta6VmNUszMxS67vOm0IrhFUC+xV73FVxKgXWpfiYYhYxnpLyGU/so7T7Rfj+VorQjzOFFonrgkXO35BFF+HVXyTlJcG6hUn6DZRkysTmOUwMEeMFN/vGDJaSuCm2kU8iKZ9dYKwYKmh/oGihLFNejC2SbomT0bXBSSDJlB1xjOPitmCxzVReUzYJMIXB5WKXoIN3IsnUT/FL7BTkc5ThtEk7NdmQzVT8RGCPNMkUcb8hI/v1amrKH104tBFL22Cp44zvxZciXhNTwwVJPK5twn4Zi8VfJuyow5RHrEfbBTFo8aIQV15TzEDGhzXK6jtGsG9Zea5AnBjYFYgzKUYI3ojsXmZlH5GqvKbQSLFO2FsJj9J3BkwEX2Zzt9MmA5+j82iRqSKmTKME25B1nAd2BL5ULlViyvRA+I7TIK+QqjE1SXDjU3EsujbOiFfRNXmFVI0pxMx7HV6WFgvG0NKgFC4HP8LLYqrWlC2ecXFqIB5fPHOpGlOsVdyYtXjaOlVItTAFvJ14Uba6wqrGFKv4HmGdLxFoobDYbgJFVY0p02ZhJuwfH7BJVKRamELLhJmBVaJi1coU4hWJPbD5WFupmk11LMqlf3Y0GDtWgpDHAAAAAElFTkSuQmCC');
+            }
+        </style>
+        <style>
+            html, body, section{
+                height: 100%;
+            }
+            li.active{
+                background-color: #dddddd;
+            }
+            a{
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .img{
+                background-repeat: no-repeat;
+            }
+            .effect .img{
+                padding: 0 16px 0 0;
+                background-size: 12px;
+            }
+            .icons{
+                text-align: center;
+                padding: 10px 0;
+            }
+            .cost.icons .img{
+                padding: 0 20px 0 0;
+                margin: 0 15px 0 0;
+                background-size: 20px;
+            }
+            .icons .img{
+                padding: 0 30px 10px 0;
+                margin: 0 10px;
+                background-size: 30px;
+            }
+            body{
+                max-width: 968px;
+                margin: 0 auto;
+            }
+            ul{
+                background-color: white;
+                font-size: 0;
+                left:0;
+                right:0;
+                top:0;
+                padding: 0;
+                position: fixed;
+                z-index:1;
+                border-bottom: 1px solid black
+            }
+            li{
+                display: inline-block;
+                font-size: 1rem;
+                list-style-type: none;
+                text-align: center;
+                width: 25%;
+            }
+            .Dice .die,
+            .Cards .card,
+            .PhoenixBorns .card{
+                display: inline-block;
+                margin: 5px;
+            }
+            .Dice .die,
+            .Cards .card,
+            .PhoenixBorns .card,
+            #dkp3 #detail{
+                width: 230px;
+                height: 300px;
+                border: 1px solid black;
+                position: relative;
+                overflow: hidden;
+            }
+            div.name,
+            div.invocation>div,
+            .top-part>div,
+            .bottom-part>div,
+            .linkedPB
+            {
+                margin: 5px;
+            }
+            .bottom-part, .invocation{
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+            }
+            .card.hasInvocation .bottom-part{
+                bottom: 35px;
+            }
+            .name{
+                font-weight: 600;
+                text-align: center;
+            }
+            .pStat{
+                padding: 30px 0;
+                text-align: center;
+            }
+            .cStat{
+                text-align: center;
+                width: 100%;
+            }
+            .pStat span, .cStat span{
+                padding: 0 10px;
+            }
+            .effect{
+                font-size: 11px;
+                text-align: justify;
+                padding: 2px;
+            }
+            .effect.InEp{
+                background-color: #dddddd;
+            }
+            .type, .zone{
+                display: inline-block;
+                font-size: 13px;
+                padding: 0 5px;
+            }
+            .type{
+                width: 135px;
+            }
+            .zone{
+                text-align: right;
+                width: 60px;
+            }
+            article{
+                padding-top: 20px;
+                height: calc(100% - 20px);
+            }
+            div.invocation{
+                width: 100%;
+                background-color: white;
+            }
+            div.invocation .name {
+                border-top: 1px solid black;
+                margin: 0;
+                height: 29px;
+                padding: 5px 0 0;
+            }
+            div.invocation .inv-top-part,
+            div.invocation .inv-bottom-part {
+                display: none;
+            }
+            div.invocation .subtitle {
+                height: 30px;
+                padding: 0 5px;
+            }
+            .card.hasInvocation:hover .invocation .inv-top-part,
+            .card.hasInvocation:hover .invocation .inv-bottom-part {
+                display:unset;
+                margin: 0;
+            }
+            .Decks {
+                font-size: 0;
+                height: 100%;
+            }
+            .deck-panel{
+                width: 50%;
+                display: inline-block;
+                font-size: 16px;
+                min-height: 100%;
+                vertical-align: top;
+            }
+            #dkp1 > div{
+                margin: 5px;
+            }
+            #dkp1 .buttons{
+                padding-right: 10px;
+            }
+            .import-file {
+                cursor: pointer;
+            }
+            .deck{
+                border: 1px solid black;
+                padding: 10px;
+                cursor: pointer;
+            }
+            #dkp2{
+                background-color: #dddddd;
+            }
+            #dkp2 > a{
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+            #deckName {
+                border: 0 none;
+                display: block;
+                margin: 3px auto;
+                text-align: center;
+                width: calc(100% - 30px);
+            }
+            #dkp2 > div{
+                text-align: left;
+                margin: 0 15px;
+            }
+            #dkp2 .cards,
+            #dkp2 .dice {
+                margin-bottom: 10px;
+            }
+            #dkp2 .cards {
+                margin-top: 10px;
+            }
+            #dkp1 .deck,
+            #dkp2 .pB,
+            #dkp2 .card,
+            #dkp2 .die{
+                position: relative;
+            }
+            #dkp2 .pB{
+                height: 20px;
+            }
+
+            #dkp1 .buttons,
+            #dkp2 .buttons{
+                position: absolute;
+                right: 0;
+                display: inline-block;
+                font-weight: normal;
+            }
+            #dkp3 > div#detail{
+                margin: 15px auto;
+                /*text-align: center;*/
+            }
+            .card.linked {
+                text-decoration: underline;
+            }
+            .card.firstFive{
+                font-weight: bold;
+            }
+            .export textarea{
+                height: 60px;
+                width: 450px;
+                resize: vertical;
+            }
+            .cardsList{
+                padding-top: 20px;
+            }
+            .filters.open + .cardsList{
+                padding-top: 180px;
+            }
+            /*filters*/
+            .filters{
+                background-color: white;
+                left: 0;
+                position: fixed;
+                right: 0;
+                text-align: center;
+                z-index: 1;
+                top: 19px;
+            }
+            #toggleFiltersDiv{
+                border-bottom: 1px solid black;
+            }
+            .filters.open #toggleFiltersDiv:before,
+            .filters.open #toggleFiltersDiv:after{
+                content: "▲";
+                padding: 0 10px;
+            }
+            .filters #toggleFiltersDiv:before,
+            .filters #toggleFiltersDiv:after{
+                content: "▼";
+                padding: 0 10px;
+            }
+            #filtersContent{
+                height: 160px;
+                display: none;
+            }
+            .filters.open #filtersContent{
+                display: block;
+            }
+            .filterList-out{
+                display: inline-block;
+                position: relative;
+                overflow: hidden;
+                margin:0 30px;
+            }
+            .filterList-out,.filterList{
+                width: 200px;
+                height: 160px;
+            }
+            .filterList-in{
+                position: absolute;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+            .filter{
+                text-align: left;
+                padding: 10px;
+            }
+            .filter.active{
+                background-color: #dddddd;
+            }
+            /*end filters*/
+
+            #loadDeckInput{
+                display: none;
+            }
+
+            .noselect{
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+
+            @media screen and (max-width: 967px){
+                #nav-deck, .Decks, .filters{
+                    display: none;
+                }
+                .cardsList{
+                    padding-top: 0;
+                }
+            }
+        </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <!--
+        <script src="./js/jquery-3.0.0.min.js"></script>
+        <script src="./js/angular.min.js"></script>
+        -->
+    </head>
+    <body>
+        <section ng-controller="navController as navCtrl">
+            <ul>
+                <li ng-class="{ active:navCtrl.isSet(1) }">
+                    <a href="" ng-click="navCtrl.setTab(1)">
+                        Héritiers
+                    </a>
+                </li>
+                <li ng-class="{ active:navCtrl.isSet(2) }">
+                    <a href="" ng-click="navCtrl.setTab(2)">
+                        Cartes
+                    </a>
+                </li>
+                <li ng-class="{ active:navCtrl.isSet(3) }">
+                    <a href="" ng-click="navCtrl.setTab(3)">
+                        Dés
+                    </a>
+                </li>
+                <li id="nav-deck" ng-class="{ active:navCtrl.isSet(4) }">
+                    <a href="" ng-click="navCtrl.setTab(4)">
+                        Deck
+                    </a>
+                </li>
+            </ul>
+            <article>
+                <div class="PhoenixBorns" ng-show="navCtrl.isSet(1)" ng-controller="PBController as PBCtrl">
+                    <div ng-repeat="pB in PBCtrl.pBs | orderBy:'name'" id="PB{{pB.id}}" class="card phoenixBorn" ng-class="{ hasInvocation:pB.invocation.name }" ng-click="PBCtrl.addToDeck(pB)">
+                        <div class="name">
+                            <a href="" title="{{pB.linkedCard.name}}" ng-click="navCtrl.scroll(2, 'C'+pB.linkedCardId,$event)">
+                                {{pB.name}}
+                            </a>
+                        </div>
+                        <div class="bottom-part">
+                            <div class="pStat">
+                                <span class="battlefield">{{pB.battlefield}}</span>
+                                <span class="life">{{pB.life}}</span>
+                                <span class="spellbook">{{pB.spellbook}}</span>
+                            </div>
+                            <div class="effect" ng-repeat="effect in pB.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                        </div>
+                        <div class="invocation" ng-show="pB.invocation">
+                            <div class="name">{{pB.invocation.name}}</div>
+                            <div class="inv-top-part">
+                                <div class="subtitle">
+                                    <span class="type">{{pB.invocation.type}}</span>
+                                    <span class="zone">{{pB.invocation.placement}}</span>
+                                </div>
+                            </div>
+                            <div class="inv-bottom-part">
+                                <div class="effect" ng-repeat="effect in pB.invocation.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                <div class="cStat">
+                                    <span class="attack">{{pB.invocation.attack}}</span>
+                                    <span class="life">{{pB.invocation.life}}</span>
+                                    <span class="recover">{{pB.invocation.recover}}</span>
+                                    <span class="number">{{pB.invocation.number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Cards" ng-show="navCtrl.isSet(2)" ng-controller="CardController as CardCtrl">
+                    <div class="filters" ng-class="{ open: CardCtrl.areFiltersOpen}">
+                        <div id="filtersContent">
+                            <div class="filterList-out" ng-repeat="(name, tagList) in CardCtrl.tags">
+                                <div class="filterList-in" >
+                                    <div class="filterList">
+                                        <div class="filter" ng-repeat="tag in tagList" ng-click="CardCtrl.switchFilter(tag)" ng-class="{active: CardCtrl.isSelected(tag) }">
+                                            {{ CardCtrl.allTags[tag] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="toggleFiltersDiv" ng-click="CardCtrl.areFiltersOpen = !CardCtrl.areFiltersOpen">Filtres</div>
+                    </div>
+                    <div class="cardsList">
+                        <div ng-repeat="card in CardCtrl.cards | orderBy:'name'" id="C{{card.id}}" class="card {card.type}" ng-class="{ hasInvocation:card.invocation.name }" ng-click="CardCtrl.addToDeck(card)">
+                            <div class="name">
+                                <a href="" title="{{card.linkedPBName}}" ng-if="card.linkedPBId" ng-click="navCtrl.scroll(1, 'PB'+card.linkedPBId, $event)">
+                                    {{card.name}}
+                                </a>
+                                <span ng-if="!card.linkedPBId">
+                                    {{card.name}}
+                                </span>
+                            </div>
+                            <div class="top-part">
+                                <div class="subtitle">
+                                        <span class="type">{{card.type}}</span>
+                                        <span class="zone">{{card.placement}}</span>
+                                    </div>
+                                <div class="cost icons" ng-bind-html="card.cost | Cost | trust"></div>
+                            </div>
+                            <div class="bottom-part">
+                                <div class="effect" ng-repeat="effect in card.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                <div class="cStat" ng-show="card.attack || card.life || card.recover">
+                                    <span class="attack">{{card.attack}}</span>
+                                    <span class="life">{{card.life}}</span>
+                                    <span class="recover">{{card.recover}}</span>
+                                </div>
+                            </div>
+                            <div class="invocation" ng-show="card.invocation">
+                                <div class="name">{{card.invocation.name}}</div>
+                                <div class="inv-top-part">
+                                    <div class="subtitle">
+                                        <span class="type">{{card.invocation.type}}</span>
+                                        <span class="zone">{{card.invocation.placement}}</span>
+                                    </div>
+                                </div>
+                                <div class="inv-bottom-part">
+                                    <div class="effect" ng-repeat="effect in card.invocation.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                    <div class="cStat">
+                                        <span class="attack">{{card.invocation.attack}}</span>
+                                        <span class="life">{{card.invocation.life}}</span>
+                                        <span class="recover">{{card.invocation.recover}}</span>
+                                        <span class="number">{{card.invocation.number}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Dice" ng-show="navCtrl.isSet(3)" ng-controller="DieController as DieCtrl">
+                    <div  ng-repeat="die in DieCtrl.dice | orderBy:'name'" id="D{{die.id}}" class="die" ng-click="DieCtrl.addToDeck(die)">
+                        <div class="name">{{die.name}}</div>
+                        <div class="icons" ng-bind-html="die.icons | Cost | trust"></div>
+                        <div class="bottom-part">
+                            <div class="effect" ng-bind-html="die.effect | Cost | trust"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Decks" ng-show="navCtrl.isSet(4)" ng-controller="DeckController as DeckCtrl">
+                    <div id="dkp1" class="deck-panel" ng-hide="DeckCtrl.showCards()">
+                        <div class="deck" ng-mouseover="DeckCtrl.loadDeck(DeckCtrl.wipDeck(),0)" ng-click="DeckCtrl.change()" ng-show="!DeckCtrl.isWipEmpty()">
+                            Deck en cours
+                            <div class="buttons">
+                                <a ng-click="DeckCtrl.resetWipDeck(); $event.stopPropagation();">×</a>
+                            </div>
+                        </div>
+                        <div>Decks construits :
+                            <label class="import-file">
+                                <input type="file" id="loadDeckInput" on-read-file="showContent($fileContent)"/>
+                                <span>Charger</span>
+                            </label>
+                            <a id="download-link" download="decks.txt" href="" ng-click="DeckCtrl.download()">Sauvegarder</a>
+                        </div>
+                        <div ng-repeat="deck in decks | reverse" class="deck" ng-mouseover="DeckCtrl.loadDeck(deck,1)" ng-click="DeckCtrl.change()">
+                            {{ deck.name }}
+                            <div class="buttons">
+                                <a ng-click="DeckCtrl.deleteDeck(deck); $event.stopPropagation();">×</a>
+                            </div>
+                        </div>
+                        <div>Decks préconstruits :</div>
+                        <div ng-repeat="deck in DeckCtrl.decksPreconstruits | reverse" class="deck" ng-mouseover="DeckCtrl.loadDeck(deck,2)" ng-click="DeckCtrl.change()">
+                            {{ deck.name }}
+                        </div>
+                    </div>
+                    <div id="dkp2" class="deck-panel">
+                        <a href="" ng-click="DeckCtrl.change()">
+                            {{ DeckCtrl.text }}
+                        </a>
+                        <input type="text" id="deckName" placeholder="Nom du deck" ng-show="DeckCtrl.typeLoaded == 0" ng-model="DeckCtrl.name"/>
+                        <div class="pB" ng-mouseover="DeckCtrl.loadDetail('pB',DeckCtrl.pB)">
+                            {{ DeckCtrl.pB.name }}
+                            <div class="buttons" ng-show="DeckCtrl.typeLoaded == 0">
+                                <span>
+                                    Cartes : {{ DeckCtrl.cardsCpt }} |
+                                    Dés : {{ DeckCtrl.diceCpt }}</span>
+                            </div>
+                        </div>
+                        <div class="cards">
+                            <div class="card" ng-class="{ linked: card.card.linkedPBId, firstFive: card.first }" ng-repeat="card in DeckCtrl.cards|orderBy:'card.name'" ng-mouseover="DeckCtrl.loadDetail('card',card.card)">
+                                {{ card.number }} x {{ card.card.name }}
+                                <div class="buttons noselect" ng-show="DeckCtrl.typeLoaded == 0">
+                                    <a ng-click="DeckCtrl.cardFive(card)">5</a>
+                                    <a ng-click="DeckCtrl.cardMinus(card)">-</a>
+                                    <a ng-click="DeckCtrl.cardPlus(card)">+</a>
+                                    <a ng-click="DeckCtrl.cardDelete(card)">×</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dice">
+                            <div class="die" ng-repeat="die in DeckCtrl.dice" ng-mouseover="DeckCtrl.loadDetail('die',die.die)">
+                                {{ die.number }} x {{ die.die.name }}
+                                <div class="buttons noselect" ng-show="DeckCtrl.typeLoaded == 0">
+                                    <a ng-click="DeckCtrl.dieMinus(die)">-</a>
+                                    <a ng-click="DeckCtrl.diePlus(die)">+</a>
+                                    <a ng-click="DeckCtrl.dieDelete(die)">×</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="save" ng-show="DeckCtrl.wipIsValid()">
+                            <a id="saveButton" ng-click="DeckCtrl.save()">Sauvegarder</a>
+                        </div>
+                        <div class="edit" ng-show="DeckCtrl.typeLoaded == 1">
+                            <a id="editButton" ng-click="DeckCtrl.copy(true)">Modifier</a>
+                        </div>
+                        <div class="copy" ng-show="DeckCtrl.typeLoaded">
+                            <a id="copyButton" ng-click="DeckCtrl.copy(false)">Copier</a>
+                        </div>
+                    </div>
+                    <div id="dkp3" class="deck-panel" ng-show="DeckCtrl.showCards()">
+                        <div id="detail">
+                            <div class="card phoenixBorn" ng-class="{ hasInvocation:DeckCtrl.detail.elt.invocation.name }" ng-show="DeckCtrl.detail.type == 'pB'">
+                                <div class="name">
+                                    {{DeckCtrl.detail.elt.name}}
+                                </div>
+                                <div class="bottom-part">
+                                    <div class="pStat">
+                                        <span class="battlefield">{{DeckCtrl.detail.elt.battlefield}}</span>
+                                        <span class="life">{{DeckCtrl.detail.elt.life}}</span>
+                                        <span class="spellbook">{{DeckCtrl.detail.elt.spellbook}}</span>
+                                    </div>
+                                    <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                </div>
+                                <div class="invocation" ng-show="DeckCtrl.detail.elt.invocation">
+                                    <div class="name">{{DeckCtrl.detail.elt.invocation.name}}</div>
+                                    <div class="inv-top-part">
+                                        <div class="subtitle">
+                                            <span class="type">{{DeckCtrl.detail.elt.invocation.type}}</span>
+                                            <span class="zone">{{DeckCtrl.detail.elt.invocation.placement}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inv-bottom-part">
+                                        <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.invocation.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                        <div class="cStat">
+                                            <span class="attack">{{DeckCtrl.detail.elt.invocation.attack}}</span>
+                                            <span class="life">{{DeckCtrl.detail.elt.invocation.life}}</span>
+                                            <span class="recover">{{DeckCtrl.detail.elt.invocation.recover}}</span>
+                                            <span class="number">{{DeckCtrl.detail.elt.invocation.number}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card {DeckCtrl.detail.elt.type}" ng-class="{ hasInvocation:DeckCtrl.detail.elt.invocation.name }" ng-show="DeckCtrl.detail.type == 'card'">
+                                <div class="name">
+                                    {{DeckCtrl.detail.elt.name}}
+                                </div>
+                                <div class="top-part">
+                                    <div class="subtitle">
+                                            <span class="type">{{DeckCtrl.detail.elt.type}}</span>
+                                            <span class="zone">{{DeckCtrl.detail.elt.placement}}</span>
+                                        </div>
+                                    <div class="cost icons" ng-bind-html="DeckCtrl.detail.elt.cost | Cost | trust"></div>
+                                </div>
+                                <div class="bottom-part">
+                                    <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                    <div class="cStat" ng-show="DeckCtrl.detail.elt.attack || DeckCtrl.detail.elt.life || DeckCtrl.detail.elt.recover">
+                                        <span class="attack">{{DeckCtrl.detail.elt.attack}}</span>
+                                        <span class="life">{{DeckCtrl.detail.elt.life}}</span>
+                                        <span class="recover">{{DeckCtrl.detail.elt.recover}}</span>
+                                    </div>
+                                </div>
+                                <div class="invocation" ng-show="DeckCtrl.detail.elt.invocation">
+                                    <div class="name">{{DeckCtrl.detail.elt.invocation.name}}</div>
+                                    <div class="inv-top-part">
+                                        <div class="subtitle">
+                                            <span class="type">{{DeckCtrl.detail.elt.invocation.type}}</span>
+                                            <span class="zone">{{DeckCtrl.detail.elt.invocation.placement}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inv-bottom-part">
+                                        <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.invocation.effects" ng-bind-html="effect.effect | Cost | trust" ng-class="effect.type"></div>
+                                        <div class="cStat">
+                                            <span class="attack">{{DeckCtrl.detail.elt.invocation.attack}}</span>
+                                            <span class="life">{{DeckCtrl.detail.elt.invocation.life}}</span>
+                                            <span class="recover">{{DeckCtrl.detail.elt.invocation.recover}}</span>
+                                            <span class="number">{{DeckCtrl.detail.elt.invocation.number}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="die" ng-show="DeckCtrl.detail.type == 'die'">
+                                <div class="name">{{DeckCtrl.detail.elt.name}}</div>
+                                <div class="icons" ng-bind-html="DeckCtrl.detail.elt.icons | Cost | trust"></div>
+                                <div class="bottom-part">
+                                    <div class="effect" ng-bind-html="DeckCtrl.detail.elt.effect | Cost | trust"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <script>
+            var app = angular.module('app', []);
+
+            app.controller('navController',function($location,$anchorScroll){
+                this.tab = 1;
+
+                this.scroll = function(tab,hash,$event){
+                    $event.stopPropagation();
+                    if(tab == 2 && window.innerWidth > 967) $anchorScroll.yOffset = 45;
+                    else $anchorScroll.yOffset = 25;
+                    this.tab = tab;
+                    $location.hash(hash);
+                    $anchorScroll();
+                }
+
+                this.isSet = function(checkTab) {
+                    return this.tab === checkTab;
+                };
+
+                this.setTab = function(activeTab) {
+                    this.tab = activeTab;
+                };
+            });
+
+            app.controller('DeckController', function($rootScope, $scope){
+                var vm =this;
+                $scope.decks = [];
+                vm.decksPreconstruits = decksPreconstruits;
+                vm.state = false;
+                vm.onDecksTxt = "Retour à la liste des decks";
+                vm.onCardsTxt = "Voir le détail du deck";
+                vm.text = vm.onCardsTxt;
+
+                vm.currentDeck = null;
+
+                vm.name = "";
+                vm.pB = null;
+                vm.cards = [];
+                vm.dice = [];
+
+                vm.detail = null;
+
+                vm.typeLoaded = 0;
+                vm.cardsCpt = 0;
+                vm.diceCpt = 0;
+
+                vm.isExported = false;
+                vm.exportJson = "";
+
+                vm.showCards = function() {
+                    return vm.state;
+                }
+
+                vm.change = function(){
+                    vm.state = !vm.state;
+                    vm.text = vm.state?vm.onDecksTxt:vm.onCardsTxt;
+                    if(vm.state)vm.loadDetail("pB",vm.pB);
+                }
+
+                /**
+                    type :
+                    0 : wip
+                    1 : construit
+                    2 : preconstruit
+                **/
+                vm.loadDeck = function(deck, type){
+                    vm.typeLoaded = type;
+                    vm.currentDeck = deck;
+
+                    vm.name = deck.name;
+                    vm.pB = findById(pBs,deck.pB);
+
+                    vm.cards = [];
+                    for (var key in deck.cards){
+                        vm.cards.push({
+                            number: deck.cards[key],
+                            card: findById(cards,key),
+                            first: deck.firstFive.includes(parseInt(key)),
+                        });
+                    };
+                    vm.dice = [];
+                    for (var key in deck.dice){
+                        vm.dice.push({
+                            number: deck.dice[key],
+                            die: findById(dice,key),
+                        });
+                    };
+
+                    if(type == 0)vm.calcCpts();
+                };
+
+                vm.loadDetail = function(type,elt) {
+                    if(vm.state)vm.detail = { type: type, elt: elt,};
+                };
+
+                vm.isWipEmpty = function() {
+                    return wipDeck.pB === null && $.isEmptyObject(wipDeck.cards) && $.isEmptyObject(wipDeck.dice);
+                };
+
+                vm.cardPlus = function(card) {
+                    if(card.number < 3 && vm.cardsCpt < 30){
+                        card.number++;
+                        wipDeck.cards[card.card.id]++;
+                        vm.cardsCpt++;
+                        wipDeck.cardsCpt++;
+                    }
+                };
+                vm.cardMinus = function(card) {
+                    if(0 < card.number){
+                        card.number--;
+                        wipDeck.cards[card.card.id]--;
+                        vm.cardsCpt--;
+                        wipDeck.cardsCpt--;
+                    }
+                    if(card.number == 0 && card.first){
+                        vm.cardFive(card);
+                    }
+                };
+                vm.cardDelete = function(card) {
+                    wipDeck.cardsCpt -= card.number;
+                    card.number = 0;
+                    vm.cardFive(card);
+                    delete wipDeck.cards[card.card.id];
+                    $rootScope.$broadcast('wipChanged');
+                }
+                vm.cardFive = function(card) {
+
+                    if(card.first){
+                        var index = wipDeck.firstFive.indexOf(card.card.id);
+                        if(index != -1) wipDeck.firstFive.splice(index, 1);
+                        card.first = false;
+                    } else {
+                        if(card.number && wipDeck.firstFive.length <5) {
+                            wipDeck.firstFive.push(card.card.id);
+                            card.first = true;
+                        }
+                    }
+                };
+
+                vm.diePlus = function(die) {
+                    if(vm.diceCpt < 10){
+                        die.number++;
+                        wipDeck.dice[die.die.id]++;
+                        vm.diceCpt++;
+                        wipDeck.diceCpt++;
+                    }
+                };
+                vm.dieMinus = function(die) {
+                    if(0 < die.number){
+                        die.number--;
+                        wipDeck.dice[die.die.id]--;
+                        vm.diceCpt--;
+                        wipDeck.diceCpt--;
+                    }
+                };
+                vm.dieDelete = function(die) {
+                    wipDeck.diceCpt -= die.number;
+                    delete wipDeck.dice[die.die.id];
+                    $rootScope.$broadcast('wipChanged');
+                }
+
+                $rootScope.$on('wipChanged', function(event, args){
+                    vm.loadDeck(wipDeck,0);
+                });
+
+                vm.wipIsValid = function() {
+                    var res = vm.typeLoaded == 0 && vm.pB && vm.cardsCpt == 30 && vm.diceCpt == 10 && wipDeck.firstFive.length == 5 && vm.name;
+
+                    return res;
+                };
+
+                vm.resetWipDeck = function() {
+                    wipDeck = {
+                        id: 0,
+                        name: "",
+                        pB: null,
+                        cards: {},
+                        dice: {},
+                        firstFive: [],
+                    }
+                    vm.loadFirstDeck();
+                };
+                vm.deleteDeck = function(deck) {
+                    var index = $scope.decks.findIndex(function(elt){ return elt.id == deck.id});
+                    console.log(index, deck);
+                    $scope.decks.splice(index, 1);
+                    console.log($scope.decks);
+                };
+                vm.save = function() {
+                    wipDeck.name = vm.name;
+                    var cardsNotZero = {};
+                    var diceNotZero = {};
+                    for( elt in wipDeck.cards){
+                        if(wipDeck.cards[elt])cardsNotZero[elt] = wipDeck.cards[elt];
+                    }
+                    for( elt in wipDeck.dice){
+                        if(wipDeck.dice[elt])diceNotZero[elt] = wipDeck.dice[elt];
+                    }
+
+                    wipDeck.cards = cardsNotZero;
+                    wipDeck.dice = diceNotZero;
+                    if(wipDeck.id){
+                        $scope.decks[$scope.decks.findIndex(function(elt){ return elt.id == wipDeck.id})] = $.extend(true, {}, wipDeck);
+                    } else {
+                        if ( $scope.decks.length == 0){
+                            wipDeck.id = 1;
+                        } else {
+                            wipDeck.id = $scope.decks[$scope.decks.length - 1].id +1;
+                        }
+                        $scope.decks.push($.extend(true, {}, wipDeck));
+                    }
+                    vm.resetWipDeck();
+                };
+
+                vm.copy = function(edit) {
+                    wipDeck = $.extend(true, {}, vm.currentDeck);
+                    if(!edit) wipDeck.id = 0;
+                    vm.loadDeck(wipDeck,0);
+                }
+
+                $scope.showContent = function($fileContent){
+                    $scope.decks = JSON.parse($fileContent);
+                    vm.loadFirstDeck();
+                };
+
+                vm.download = function() {
+                    $('#download-link').attr('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(angular.toJson($scope.decks)));
+                };
+
+                vm.loadFirstDeck = function() {
+                    if(!vm.isWipEmpty()) {
+                        vm.loadDeck(wipDeck,0);
+                    } else if ($scope.decks && $scope.decks.length) {
+                        vm.loadDeck($scope.decks[$scope.decks.length - 1],1);
+                    } else {
+                        vm.loadDeck(decksPreconstruits[decksPreconstruits.length - 1],2);
+                    }
+                }
+                vm.wipDeck = function() {
+                    return wipDeck;
+                };
+                vm.calcCpts = function() {
+                    vm.cardsCpt = 0;
+                    vm.diceCpt = 0;
+
+                    for( elt in wipDeck.cards){
+                        if(wipDeck.cards[elt])vm.cardsCpt += wipDeck.cards[elt];
+                    }
+                    for( elt in wipDeck.dice){
+                        if(wipDeck.dice[elt])vm.diceCpt += wipDeck.dice[elt];
+                    }
+                }
+
+                vm.loadFirstDeck();
+
+            });
+            app.controller('PBController', function($rootScope){
+                this.pBs = pBs;
+
+                this.addToDeck = function(pB){
+                    if(wipDeck.pB){
+                        if(wipDeck.pB == pB.id) return;
+                        var old = findById(pBs,wipDeck.pB);
+                        wipDeck.cardCpt -= wipDeck.cards[old.linkedCardId];
+                        delete wipDeck.cards[old.linkedCardId];
+                    }
+
+                    wipDeck.pB = pB.id;
+                    wipDeck.cards[pB.linkedCardId] = 0;
+
+                    $rootScope.$broadcast('wipChanged');
+                };
+            });
+            app.controller('CardController', function($rootScope){
+                var vm = this;
+                vm.cards = cards;
+
+                vm.allTags = tags;
+
+                vm.tags = {
+                    type: [1,3,4,5,7,8,43,],
+                    cost: [9,10,11,12,13,14,15,16,17,58,],
+                    mecanism: [18,19,24,25,26,27,29,31,35,38,39,40,44,47,51,52,],
+                };
+                vm.filters = [];
+
+                vm.areFiltersOpen = false;
+
+                vm.filter = function(reset){
+                    if(!vm.filters.length)vm.cards = cards;
+                    else {
+                        var cardsTmp;
+                        if(reset){
+                            cardsTmp = cards;
+                        } else {
+                            cardsTmp = vm.cards;
+                        }
+                        cardsTmp = cardsTmp.filter(vm.checkTags);
+                        vm.cards = cardsTmp;
+                    }
+                };
+
+                vm.checkTags = function(card){
+                    if(!card.tags)return false;
+                    return arrayContains(vm.filters, card.tags);
+                }
+
+                vm.switchFilter = function(filter){
+                    var index = vm.filters.indexOf(filter);
+                    var reset;
+                    if( index >-1){
+                        vm.filters.splice(index,1);
+                        reset = true;
+                    } else {
+                        pushSort(filter,vm.filters);
+                        reset = false;
+                    }
+
+                    vm.filter(reset);
+                };
+                vm.isSelected = function(filter){
+                    return vm.filters.indexOf(filter) >-1;
+                };
+
+
+                vm.addToDeck = function(card){
+                    if(card.linkedPBId === undefined || card.linkedPBId === wipDeck.pB){
+                        if(!wipDeck.cards[card.id]) wipDeck.cards[card.id] = 0;
+                        $rootScope.$broadcast('wipChanged');
+                    }
+                };
+            });
+            app.controller('DieController', function($rootScope){
+                this.dice = dice;
+
+                this.addToDeck = function(die){
+                    if(!wipDeck.dice[die.id]) wipDeck.dice[die.id] = 0;
+                    $rootScope.$broadcast('wipChanged');
+                };
+            });
+
+            app.directive('onReadFile', function($parse) {
+                return {
+                    restrict: 'A',
+                    scope: false,
+                    link: function(scope, element, attrs) {
+                        var fn = $parse(attrs.onReadFile);
+
+                        element.on('change', function(onChangeEvent) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(onLoadEvent) {
+                                scope.$apply(function() {
+                                    fn(scope, {$fileContent:onLoadEvent.target.result});
+                                });
+                            };
+
+                            reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+                        });
+                    }
+                };
+            });
+
+            app.filter('Cost',function(){
+                return function(text){
+                    if(text) return text.replace(/%(\w*)%/g, '<span class="img $1"></span>');
+                };
+            });
+            app.filter('trust', [
+                '$sce',
+                function($sce) {
+                    return function(text, type) {
+                        // Defaults to treating trusted text as `html`
+                        return $sce.trustAs(type || 'html', text);
+                    }
+                }
+            ]);
+            app.filter('reverse', function() {
+              return function(items) {
+                  //console.log($.type(items))
+                return items.slice().reverse();
+              };
+            });
+
+            function locationOf(element, array, start, end) {
+                if (array.length === 0)
+                    return -1;
+
+                start = start || 0;
+                end = end || array.length;
+                var pivot = (start + end) >> 1;
+
+                var c = element < array[pivot] ? -1 : (element > array[pivot] ?1 : 0);
+                if (end - start <= 1) return c == -1 ? pivot - 1 : pivot;
+
+                switch (c) {
+                    case -1: return locationOf(element, array, start, pivot);
+                    case 0: return pivot;
+                    case 1: return locationOf(element, array, pivot, end);
+                };
+            };
+
+            function pushSort(element, array){
+                array.splice(locationOf(element, array) + 1, 0, element);
+                return array;
+            }
+
+            function findById(arr, id){
+                id = parseInt(id);
+                return $.grep(arr,function(e){return e.id === id})[0];
+            };
+
+            function maxId(arr){
+                var max = 0;
+                if(arr.length == 0) return 0;
+                arr.forEach(function(elt){
+                    if(elt.id > max) max = elt.id;
+                });
+                return max;
+            }
+
+            function arrayContains(arr1, arr2){
+                if(arr2.length < arr1.length) return false;
+                var i = 0, j = 0;
+                while( i < arr1.length && j < arr2.length){
+                    if(parseInt(arr1[i]) == parseInt(arr2[j])){
+                        i++;j++;
+                    } else if (parseInt(arr1[i]) < parseInt(arr2[j])) {
+                        return false;
+                    } else {
+                        j++;
+                    }
+                }
+                return i == arr1.length;
+            }
+
+            var wipDeck = {
+                id: 0,
+                name: "",
+                pB: null,
+                cards: {},
+                dice: {},
+                firstFive: [],
+            }
+
+            var decksPreconstruits = [
+                {
+                    id: 1,
+                    name: "Les Hommes de fer",
+                    pB: 1,
+                    cards: {1: 3, 2: 3, 3: 3, 4: 3, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3, 10: 3},
+                    dice: {3: 5, 4: 5},
+                    firstFive: [1,7,8,9,10,],
+                },
+                {
+                    id: 2,
+                    name: "Les Serpents d'argent",
+                    pB: 2,
+                    cards: {11: 3, 12: 3, 13: 3, 14: 3, 15: 3, 16: 3, 17: 3, 18: 3, 19: 3, 20: 3},
+                    dice: {1: 5, 3: 5},
+                    firstFive: [11,15,17,18,19,],
+                },
+                {
+                    id: 3,
+                    name: "Les Gardiens de la brume",
+                    pB: 3,
+                    cards: {21: 3, 22: 3, 23: 3, 24: 3, 25: 3, 26: 3, 27: 3, 28: 3, 29: 3, 30: 3},
+                    dice: {2: 5, 3: 5},
+                    firstFive: [21,22,23,27,30,],
+                },
+                {
+                    id: 4,
+                    name: "Les Sirènes de la Mer de nuage",
+                    pB: 4,
+                    cards: {31: 3, 32: 3, 33: 3, 34: 3, 35: 3, 36: 3, 37: 3, 38: 3, 39: 3, 40: 3},
+                    dice: {1: 5, 2: 5},
+                    firstFive: [31,32,33,34,39,],
+                },
+                {
+                    id: 5,
+                    name: "La Reine des Bois-de-Sang",
+                    pB: 5,
+                    cards: {41: 3, 42: 3, 43: 3, 44: 3, 45: 3, 46: 3, 47: 3, 48: 3, 49: 3, 50: 3},
+                    dice: {1: 5, 4: 5},
+                    firstFive: [41,42,43,49,50,],
+                },
+                {
+                    id: 6,
+                    name: "Les Ombres de Viros",
+                    pB: 6,
+                    cards: {51: 3, 52: 3, 53: 3, 54: 3, 55: 3, 56: 3, 57: 3, 58: 3, 59: 3, 60: 3},
+                    dice: {2: 5, 4: 5},
+                    firstFive: [54,55,57,58,59,],
+                },
+                {
+                    id: 7,
+                    name: "Les Descendants de Sombreciel",
+                    pB: 7,
+                    cards: {61: 3, 62: 3, 63: 3, 64: 3, 65: 3, 66: 3, 67: 3, 68: 3, 69: 3, 70: 3},
+                    dice: {4: 10},
+                    firstFive: [62,63,65,68,69,],
+                },
+                {
+                    id: 8,
+                    name: "Les Géants de Givraltar",
+                    pB: 8,
+                    cards: {71: 3, 72: 3, 73: 3, 74: 3, 75: 3, 76: 3, 77: 3, 78: 3, 79: 3, 80: 3},
+                    dice: {3: 10},
+                    firstFive: [72,73,74,75,80,],
+                },
+                {
+                    id: 9,
+                    name: "The Roaring Rose",
+                    pB: 9,
+                    cards: {81: 3, 82: 3, 83: 3, 84: 3, 85: 3, 86: 3, 87: 3, 88: 3, 89: 3, 90: 3},
+                    dice: {1: 10},
+                    firstFive: [],
+                },
+                {
+                    id: 10,
+                    name: "The Duchess of Deception",
+                    pB: 10,
+                    cards: {91: 3, 92: 3, 93: 3, 94: 3, 95: 3, 96: 3, 97: 3, 98: 3, 99: 3, 100: 3},
+                    dice: {2: 10},
+                    firstFive: [],
+                },
+            ];
+
+            var dice = [
+                {
+                    id:1,
+                    name: "Envoutement",
+                    icons: "%PE% %CE%",
+                    effect: "%S% 1%PE% : Placez le dé utilisé pour activer ce pouvoir sur une unité ciblée que vous contrôlez. Tant que ce dé est sur cette unité, ajoutez 1 à sa valeur d'attaque et ses PV. Vos dés placés ainsi vont dans votre réserve inactive à la fin de la manche."
+                },
+                {
+                    id:2,
+                    name: "Illusion",
+                    icons: "%PI% %CI%",
+                    effect: "%S% 1%PI% : Choisissez 1 dé de la réserve active d'un adversaire et déplacez-le dans sa réserve inactive."
+                },
+                {
+                    id:3,
+                    name: "Nature",
+                    icons: "%PN% %CN%",
+                    effect: "%S% 1%PN% : Infligez 1 dégât à une unité ciblée."
+                },
+                {
+                    id:4,
+                    name: "Rituel",
+                    icons: "%PR% %CR%",
+                    effect: "%S% 1%PR% : Consultez votre défausse pour y prendre un allié et ajoutez-le à votre main. Infligez à votre Héritier autant de dégâts que la valeur de cet allié."
+                }
+            ];
+
+            var pBs = [
+                {
+                    id: -3,
+                    name: "Dimona Odinstar",
+                    battlefield: 5,
+                    life: 17,
+                    spellbook: 5,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Order: %S% %E% 2%B%: remove 1 exhaustion token from a target unit on your battlefield.",
+                        },
+                    ],
+                    linkedCardId: -3,
+                    spheres: "",
+                },{
+                    id: -2,
+                    name: "Orrick Gilstream",
+                    battlefield: 5,
+                    life: 19,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Bounty: %S% %E% 2%B%: Select up to 4 dice in your exhausted pool. They must all be different types. Re-roll them, and place them into your active pool.",
+                        },
+                    ],
+                    linkedCardId: -2,
+                    spheres: "",
+                },{
+                    id: -1,
+                    name: "Lulu Firststone",
+                    battlefield: 4,
+                    life: 21,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Bolster: %S% %E% 1%B%: Add 1 to the attack value of all units you currently control for the remainder of this turn",
+                        },
+                    ],
+                    linkedCardId: -1,
+                    spheres: "",
+                },
+                {
+                    id: 1,
+                    name: "Forge Roarkwin",
+                    battlefield: 6,
+                    life: 15,
+                    spellbook: 5,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Coup tranchant : %S% 1%D% : Infligez 1 dégât à une unité ciblée. Si un adversaire n'a pas d'unité en jeu, vous pouvez alors infliger 1 dégât à son Héritier.",
+                        },
+                    ],
+                    linkedCardId: 5,
+                    spheres: "%B%",
+                },
+                {
+                    id: 2,
+                    name: "Méoni Vipère",
+                    battlefield: 3,
+                    life: 22,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Frappe : Après qu'un joueur ait déclaré ses attaquants, vous pouvez payer 1%B% et placer 1 jeton Épuisement sur cette Héritière. Dans ce cas, ajoutez 2 à la valeur d'attaque d'une unité ciblée jusqu'à la fin du tour.",
+                        },
+                    ],
+                    linkedCardId: 15,
+                    spheres: "%PE% %PN%",
+                },
+                {
+                    id: 3,
+                    name: "Aradèle Gaardété",
+                    battlefield: 8,
+                    life: 16,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Souffle d'eau : %S% %E% 1%CN% : Infligez 2 dégâts à une unité ciblée.",
+                        },
+                    ],
+                    linkedCardId: 23,
+                    spheres: "%PN%,"
+                },
+                {
+                    id: 4,
+                    name: "Saria Guidemane",
+                    battlefield: 5,
+                    life: 20,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Attraction : %S% %E% 1%CE% : Vous pouvez piocher 1 carte. Dans ce cas, vous pouvez cibler un joueur. Ce dernier doit défausser 1 carte du dessus de sa pioche.",
+                        },
+                    ],
+                    linkedCardId: 34,
+                    spheres: "%PE%"
+                },
+                {
+                    id: 5,
+                    name: "Jessa Na Ni",
+                    battlefield: 5,
+                    life: 18,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Cris des défunts : Chaque fois qu'une unité qu'un adversaire contrôle quitte le jeu, vous pouvez payer 1%B% pour infliger 1 dégât à son Héritier.",
+                        },
+                    ],
+                    linkedCardId: 41,
+                    spheres: "%B%",
+                },
+                {
+                    id: 6,
+                    name: "Noah Lunerouge",
+                    battlefield: 6,
+                    life: 20,
+                    spellbook: 3,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Cible fantomatique : %S% %E% 1%CR% : Placez 1 jeton Épuisement sur un sort préparatoire ciblé d'un grimoire adverse.",
+                        },
+                    ],
+                    linkedCardId: 58,
+                    spheres: "%PI%"
+                },
+                {
+                    id: 7,
+                    name: "Brennen Sombreciel",
+                    battlefield: 5,
+                    life: 20,
+                    spellbook: 3,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Brulure spirituelle : %S% %E% 1%B% : Détruisez une unité que vous contrôlez. Dans de cas, vous pouvez infliger 2 dégâts à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    linkedCardId: 68,
+                    spheres: "%PR%",
+                },
+                {
+                    id: 8,
+                    name: "Rin Nordèle",
+                    battlefield: 6,
+                    life: 17,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Renforcement de glace : %S% %E% : Liez un sort d'altération invoqué Renforcement de glace à une unité ciblée que vous contrôlez.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Renforcement de glace",
+                        type: "Sort d'altération invoqué",
+                        placement: "Unité",
+                        life: "+1",
+                        number: 5
+                    },
+                    linkedCardId: 79,
+                    spheres: "%B%",
+                },
+                {
+                    id: 9,
+                    name: "Leo Sunshadow",
+                    battlefield: 6,
+                    life: 19,
+                    spellbook: 3,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Summon Glow Finch: %S% %E% 1%B% : Place a Glow Finch conjuration onto your battlefield.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Glow Finch",
+                        type: "Invocation",
+                        placement: "Arène",
+                        attack : 0,
+                        life: 2,
+                        recover: 1,
+                        number: 1,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect:"Protecteur d'unité : Cette unité peut protéger une unité qui se fait attaquer.<br/>Decoy: When a unit you control would become the target of a spell, ability or dice power, and this unit could have been chosen as that target, you may place 1 exhaustion token on this unnit to change the chosen target to be this unit instead.",
+                            },
+                            {
+                                type: "InEp",
+                                effect:"Last Request 1: When this unit is destroyed, discard 1 card off the top of a target player's draw pile.<br/>Magic Rejuvenation: %S%: Remove an alteration spell attached to this unit from the game. If you do, remove all exhaustion tokens form this unit.",
+                            },
+                        ],
+                    },
+                    linkedCardId: 81,
+                    spheres: "%B%",
+                },
+                {
+                    id: 10,
+                    name: "Victoria Glassfire",
+                    battlefield: 5,
+                    life: 18,
+                    spellbook: 4,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"Shadow Spring: %S% %E% 1%PI%: Select 2 dice in your exhausted pool and place them into your active pool on a side of your choice.",
+                        },
+                    ],
+                    linkedCardId: 91,
+                    spheres: "%PI%",
+                },
+                /*
+                {
+                    id: ,
+                    name: "",
+                    battlefield: ,
+                    life: ,
+                    spellbook: ,
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect:"",
+                        },
+                    ],
+                    invocation: {
+                        name: "",
+                        type: "",
+                        placement: "",
+                        attack : ,
+                        life: ,
+                        recover: ,
+                        number: ,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect:"",
+                            },
+                            {
+                                type: "InEp",
+                                effect:"",
+                            },
+                        ],
+                    },
+                    linkedCardId: ,
+                    spheres: "",
+                },
+                */
+            ];
+
+            var cards = [
+                {
+                    id: -3,
+                    name: "Rayward knight",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 3%B%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Endurance: Remove all exhaustion tokens from this unit at the end of each round.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 3,
+                    recover: 3,
+                    tags: [],
+                },
+                {
+                    id: -2,
+                    name: "Gobi sunshield",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 4%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Alert: Do not place an exhaustion token on this unit as a result of its countering.",
+                        },
+                    ],
+                    attack: 2,
+                    life: 5,
+                    recover: 3,
+                    tags: [],
+                },
+                {
+                    id: -1,
+                    name: "Phoenix barrage",
+                    type: "Sort d'action",
+                    placement: "Arène",
+                    cost: "%P% 3%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Deal 4 damage to a target unit. Deal 2 damage to a target Phoenixborn.",
+                        },
+                    ],
+                    tags: [],
+                },
+                //*/
+                {
+                    id: 1,
+                    name: "Invoquer Rhinofèros",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 6%B% : Placez une invocation Rhinofèros dans votre arène.<br/>Concentration 1 : Réduisez le cout d'activation de ce sort de 1%B%.<br/>Concentration 2 : Réduisez le cout d'activation de ce sort de 1%B% de plus.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Rhinofèros",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 5,
+                        life: 4,
+                        recover: 0,
+                        number: 5
+                    },
+                    tags: [1,2,3,11,13,16,18,],
+                },
+                {
+                    id: 2,
+                    name: "Chant vengeur",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Lorsqu'une unité que vous controlez est détruite, vous pouvez placer 1 jeton Épuisement sur ce sort pour infliger 1 dégât à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    tags: [3,12,16,13,19,20,21,23,24,],
+                },
+                {
+                    id: 3,
+                    name: "Armure hérissée",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CN% 1%B%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Désormais, cette unité a cette capacité : Peau hérissée 2 : Si cette unité subit des dégâts de l'attaque ou la contrattaque d'une ou plusieurs unités, infligez simultanément 2 dégâts à chacune de ces unités attaquant ou contrattaquant.",
+                        },
+                    ],
+                    life: "+2",
+                    tags: [5,6,11,13,16,23,25,],
+                },
+                {
+                    id: 4,
+                    name: "Gardien",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CN% 1%CR%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Lorsque ce sort entre en jeu placez 3 jetons État dessus. Défaussez ce sort lorsqu'il n'y a plus de jetons État dessus.",
+                        },
+                        {
+                            type: "Ep",
+                            effect: "Lorsqu'une unité que vous contrôlez subirait des dégâts, retirez de ce sort autant de jetons État que vous voulez. Empêchez 1 dégât à cette unité pour chaque jeton retiré.",
+                        },
+                    ],
+                    tags: [3,11,12,13,17,27,],
+                },
+                {
+                    id: 5,
+                    name: "Cent lames",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 2%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Infligez 1 dégât à un Héritier ciblé. Infligez 1 dégât à toutes les unités adverses. Piochez 1 carte.",
+                        },
+                    ],
+                    tags: [4,13,15,19,20,21,23,29,43,],
+                },
+                {
+                    id: 6,
+                    name: "Renforcer",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CN% 1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% : Ajoutez 2 à la valeur d'attaque de l'unité ciblée jusqu'à la fin du tour.<br/>Concentration 2 : Ajoutez 1 de plus à la valeur d'attaque de l'unité ciblée jusqu'à la fin du tour.",
+                        },
+                    ],
+                    tags: [3,11,12,13,14,17,18,26,],
+                },
+                {
+                    id: 7,
+                    name: "Expansion d'énergie",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%PR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% : Relancez 1 dé au choix de votre réserve inactive puis placez-le dans votre réserve active.",
+                        },
+                    ],
+                    tags: [3,12,13,16,31,32,33,],
+                },
+                {
+                    id: 8,
+                    name: "Marteleuse",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%PR% 1%CN% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Contrecoup 1 : Lorsque cette unité inflige des dégâts en attaquant ou en contrattaquant, vous pouvez placer 1 blessure sur une unité ciblée.",
+                        },
+                    ],
+                    attack: 4,
+                    life: 3,
+                    recover: 1,
+                    tags: [8,11,12,13,17,19,21,22,],
+                },
+                {
+                    id: 9,
+                    name: "Forgeron",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 2%B%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Ingénieux 1: Lorsque cette unité entre en jeu, placez 1 jeton État dessus. Au début de chaque phase Tours des joueurs, placez 1 jeton État sur cette unité.<br/>Heures supplémentaires: Durant votre tour, vous pouvez retirer autant de jetons État de cette unité que vous voulez. Pour chaque jeton État retiré, vous pouvez faire 1 action secondaire (%S%) ce tour-ci.",
+                        },
+                    ],
+                    attack: 2,
+                    life: 2,
+                    recover: 1,
+                    tags: [8,13,14,15,35,36,],
+                },
+                {
+                    id: 10,
+                    name: "Ancrenaute",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Lancer 1 : Durant votre tour, vous pouvez placer 1 jeton Épuisement sur cette unité pour infliger 1 dégât à une unité ciblée.",
+                        },
+                    ],
+                    attack: 0,
+                    life: 1,
+                    recover: 1,
+                    tags: [8,13,15,19,21,23,],
+                },
+                //*/
+                //*/
+                {
+                    id: 11,
+                    name: "Mémoire parfaite",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez chercher dans votre pioche pour trouver 1 carte que vous ajoutez à votre main. Dans ce cas, mélangez votre pioche.",
+                        },
+                    ],
+                    tags: [4,9,13,16,29,30,],
+                },
+                {
+                    id: 12,
+                    name: "Rafraichir",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Retirez tous les jetons Épuisement d'une unité ciblée.",
+                        },
+                    ],
+                    tags: [4,9,13,16,37,],
+                },
+                {
+                    id: 13,
+                    name: "Transfert",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Déplacez 1 jeton (Blessure, État, Épuisement) d'une carte non-Héritier d'un joueur ciblé sur une autre carte non-Héritier que ce joueur contrôle.",
+                        },
+                    ],
+                    tags: [4,9,13,16,22,35,37,38,39,],
+                },
+                {
+                    id: 14,
+                    name: "Voile doré",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CN% 1%CE%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort lorsqu'un joueur utilise un sort, une capacité ou un pouvoir de dé qui cible une unité que vous contrôlez. Annulez l'effet du sort, de la capacité ou du pouvoir de dé.",
+                        },
+                    ],
+                    tags: [7,9,11,17,40,],
+                },
+                {
+                    id: 15,
+                    name: "Invoquer Serpent argenté",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%PE% 1%PN% : Placez une invocation Serpent argenté dans votre arène.<br/>Concentration 1 : Placez 1 jeton État sur ce Serpent argenté.<br/>Concentration 2 : Placez 1 jeton État de plus sur ce Serpent argenté.",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "Sort protégé : Ce sort ne peut être affecté par le sort d'un adversaire.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Serpent argenté",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: "X",
+                        life: 4,
+                        recover: 3,
+                        number: 3,
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Consommer : Lorsqu'une unité qu'un adversaire contrôle est détruite par un sort, une attaque ou une contrattaque, une capacité ou un pouvoir de dé que vous contrôlez, placez 1 jeton État sur cette unité. Si l'unité détruite est un allié, retirez la du jeu.<br/>X = le nombre de jetons État sur cette unité.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,9,11,13,17,18,24,35,41,43,46],
+                },
+                {
+                    id: 16,
+                    name: "Or fondu",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 2%PN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Placez 3 blessures sur une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    tags: [4,11,13,16,19,20,21,22,],
+                },
+                {
+                    id: 17,
+                    name: "Appel aux royaumes",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Tournez jusqu'à 3 dés de votre réserve active, chacun sur la face de votre choix.",
+                        },
+                    ],
+                    tags: [4,15,31,34,],
+                },
+                {
+                    id: 18,
+                    name: "Invoquer Doreur",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CE%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CN% Placez une invocation Doreur dans votre arène. Vous pouvez infliger 1 dégât à une unité ciblée.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Doreur",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 1,
+                        life: 2,
+                        recover: 0,
+                        number: 5,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Protecteur d'unité : Cette unité peut protéger une unité qui se fait attaquer.",
+                            },
+                            {
+                                type: "InEp",
+                                effect: "Héritage 1 : Lorsque cette unité est détruite, vous pouvez placer 1 jeton État sur une unité ciblée.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,9,11,13,17,19,21,23,24,27,28,35,51,],
+                },
+                {
+                    id: 19,
+                    name: "Don de pouvoir",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 2%CN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Après qu'un joueur ait déclaré ses attaquants, vous pouvez payer 1%B% et placer 1 jeton Épuisement sur ce sort. Dans ce cas, ajoutez 1 à la valeur d'attaque d'une unité ciblé pour le reste du tour.<br/>Vous pouvez piocher 1 carte. Dans ce cas, défaussez 1 carte de votre main.<br/>Concentration 1 : Vous pouvez choisir un dé de votre réserve inactive, le relancer puis le placer dans votre réserve active.",
+                        },
+                    ],
+                    tags: [3,11,13,16,18,26,29,31,32,33,],
+                },
+                {
+                    id: 20,
+                    name: "Hypnotiser",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% 2%CE% : Choissez une unité ciblée que vous contrôlez. Elle acquiert la capacité suivante jusqu'à la fin du tour.<br/>Contournement : Lorsque cette unité attaque, son attaque ne peut être bloquée ou protégée.",
+                        },
+                    ],
+                    tags: [3,9,13,14,16,42,],
+                },
+                //*/
+                //*/
+                {
+                    id: 21,
+                    name: "Brume changeante",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% : Tournez jusqu'à 2 dés de votre réserve active, chacun sur la face de votre choix.",
+                        },
+                    ],
+                    tags: [3,10,13,14,16,31,34],
+                },
+                {
+                    id: 22,
+                    name: "Invoquer Esprit de la brume",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CI% : Placez une invocation Esprit de la brume dans votre arène. Vous pouvez payer en plus 1%B% lorsque vous activez ce sort pour placer une invocation Esprit de la brume de plus dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Esprit de la brume",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 1,
+                        life: 1,
+                        recover: 0,
+                        number: 10,
+                    },
+                    tags: [1,2,3,10,13,16,],
+                },
+                {
+                    id: 23,
+                    name: "Invoquer Jaguar bleu",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 2%B% : Placez une invocation Jaguar bleu dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Jaguar bleu",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 2,
+                        life: 2,
+                        recover: 0,
+                        number: 5,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Regard perçant 1 : Après l'entrée en jeu d'une unité dans l'arène d'un adversaire, vous pouvez payer 1%B% pour placer 1 jeton Épuisement sur cette unité.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,13,15,38,43,],
+                },
+                {
+                    id: 24,
+                    name: "Réflexions dans l'eau",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CI%",
+                    firstEpInEp: "Ep",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Tant que ce sort est lié à cette unité, ignorez toutes les capacités de cette unité, à l'exception de ses capacités inépuisables.",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "Raviver : 1%B%",
+                        }
+                    ],
+                    tags: [5,6,10,13,16,38,44,],
+                },
+                {
+                    id: 25,
+                    name: "Typhon de brume",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CI% 1%CN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Infligez 1 dégât à toutes les unités adverses. Vous pouvez piocher 1 carte.",
+                        },
+                    ],
+                    tags: [4,10,11,13,17,19,21,23,29,],
+                },
+                {
+                    id: 26,
+                    name: "Sortis de la brume",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%S% 1%PI% 1%PN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Infligez X dégât(s) à une unité ciblée. Vous pouvez piocher 1 carte. X = le nombre d'unités que vous avez en jeu.",
+                        },
+                    ],
+                    tags: [4,10,11,14,17,19,21,23,29],
+                },
+                {
+                    id: 27,
+                    name: "Armure de racines",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%S% 1%CN%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Raviver 1%B%",
+                        },
+                    ],
+                    life: "+2",
+                    tags: [5,6,11,14,16,25,44,],
+                },
+                {
+                    id: 28,
+                    name: "Regard fixe",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 2%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Placez 2 jetons Épuisement sur une unité ciblée.",
+                        },
+                    ],
+                    tags: [4,10,13,16,38,],
+                },
+                {
+                    id: 29,
+                    name: "Croissance massive",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CN% 1%B%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Ce sort ne peut être lié qu'à une unité dont la valeur d'attaque est de 2 ou moins.<br/>Sort protégé : Ce sort ne peut être affecté par un sort qu'un adversaire contrôle.<br/>Éphémère : Défaussez ce sort à la fin de cette manche.",
+                        },
+                    ],
+                    attack: "+4",
+                    life: "+4",
+                    tags: [5,6,11,13,16,25,26,45,46],
+                },
+                {
+                    id: 30,
+                    name: "Invoquer Papillon moine",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%PN% : Placez une invocation Papillon moine dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Papillon moine",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 1,
+                        life: "X",
+                        recover: 1,
+                        number: 5,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Protecteur d'unité : Cette unité peut protéger une unité qui se fait attaquer.",
+                            },
+                            {
+                                type: "InEp",
+                                effect: "Ultime bénédiction 1 : Lorsque cette unité est détruite, retirez 1 blessure d'une unité ou Héritier ciblé.<br/>X = nombre de sorts Invoquer Papillon moine dans votre grimoire.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,11,13,16,18,24,27,28,39,51],
+                },
+                //*/
+                //*/
+                {
+                    id: 31,
+                    name: "Purger",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CE% : Choisissez un joueur ciblé qui doit défausser 1 carte du dessus de sa pioche.<br/>Concentration 1 :Vous pouvez payer 1%B% pour que le joueur ciblé défausse 1 carte de plus.",
+                        },
+                    ],
+                    tags: [3,9,13,16,18,47,],
+                },
+                {
+                    id: 32,
+                    name: "Abondance",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% : Tous les joueurs peuvent piocher jusqu'à 2 cartes. Pour chaque carte qu'un joueur ne veut ou ne peut piocher, infligez 1 dégât à son Héritier.<br/>Concentration 1 : Réduisez de 1 les dégâts que votre Héritier subit à cause de ce sort.<br/>Concentration 2 : Réduisez de 1 de plus les dégâts que votre Héritier subit à cause de ce sort.",
+                        },
+                    ],
+                    tags: [3,10,13,16,18,19,20,23,29,47,],
+                },
+                {
+                    id: 33,
+                    name: "Invoquer Chouette à trois yeux",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CE% : Placez une invocation Chouette à trois yeux dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Chouette à trois yeux",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 1,
+                        life: 2,
+                        recover: 0,
+                        number: 5,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Drain de mémoire 1 : %P% %E% : Choissiez un joueur ciblé qui doit défausser 1 carte de son choix de sa main.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,9,13,16,47,48,],
+                },
+                {
+                    id: 34,
+                    name: "Invoquer Corbeau marin",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 3%B% : Placez une invocation Corbeau marin dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Corbeau marin",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 3,
+                        life: 2,
+                        recover: 0,
+                        number: 2,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Avantage au combat : Lorsque cette unité combat, elle inflige ses dégâts avant que les autres unités sans Avantage au combat n'infligent les leurs.",
+                            },
+                            {
+                                type: "InEp",
+                                effect: "Protection magique : Cette unité ne peut être affectée par un sort qu'un adversaire contrôle.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,13,15,27,43,49,50,],
+                },
+                {
+                    id: 35,
+                    name: "Pouvoir dissimulé",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choisissez jusqu'à 2 dés de votre réserve inactive et placez-les dans votre réserve active, chacun sur la face de votre choix.",
+                        },
+                    ],
+                    tags: [4,10,13,16,31,32,34],
+                },
+                {
+                    id: 36,
+                    name: "Sceau",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE% 1%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choisissez un sort préparatoire dans le grimoire d'un joueur ciblé. Placez 1 jeton Épuisement sur le sort choisit ainsi que chaque autre exemplaire de ce sort dans le grimoire de ce joueur.",
+                        },
+                    ],
+                    tags: [4,9,10,13,17,38,],
+                },
+                {
+                    id: 37,
+                    name: "Clone étrange",
+                    type: "Sort d'action",
+                    placement: "Arène",
+                    cost: "%P% 2%CI%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Lorsque vous placez ce sort dans votre arène choisissez une unité qu'un adversaire contrôle. Placez sur ce sort autant de jetons État que la valeur d'attaque de l'unité choisie. Ce sort est aussi considéré comme un allié dont les valeurs d'attaque et de PV égalent au nombre de jetons État présents dessus, et dont la valeur de regain est de 0. Aucun sort d'altération ne peut être lié à ce sort.<br/>Éphémère : Défaussez ce sort à la fin de cette manche.",
+                        },
+                    ],
+                    tags: [4,8,10,13,16,35,45,],
+                },
+                {
+                    id: 38,
+                    name: "Douleur partagée",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "2%CE%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort après que votre Héritier ait subi des dégâts. Infligez 3 dégâts à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    tags: [7,9,16,19,20,21,23,],
+                },
+                {
+                    id: 39,
+                    name: "Danseuse de flammes roses",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CI% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Distraction : %S%%E% : Placez 1 jeton Épuisement sur une unité ciblée.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 1,
+                    recover: 0,
+                    tags: [8,10,13,14,16,38,],
+                },
+                {
+                    id: 40,
+                    name: "Violoniste enchantée",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Chanson du chagrin : Après qu'un adversaire ait défaussé 1 carte ou plus de sa pioche, vous pouvez payer 1B pour placer 1 blessure sur une unité ciblée.",
+                        },
+                    ],
+                    attack: 1,
+                    life: 2,
+                    recover: 0,
+                    tags: [8,13,15,19,21,22,47,],
+                },
+                //*/
+                //*/
+                {
+                    id: 41,
+                    name: "Peur",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choisissez une cible qu'un adversaire contrôle. Si c'est une invocation, remettez la dans la pile d'invocation, remettez-la dans la pile d'invocations de son propriétaire. Autrement, son propriétaire la reprend en main.",
+                        },
+                    ],
+                    tags: [4,13,15,43,],
+                },
+                {
+                    id: 42,
+                    name: "Transfert de sang",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% 1%CE% 1%CR% : Infligez 2 dégâts à une unité ciblée que vous contrôlez. Dans ce cas, vous pouvez retirer 2 blessures d'une autre unité que vous contrôlez ou 1 blessure de votre Héritier.",
+                        },
+                    ],
+                    tags: [3,9,12,13,14,17,39,52,],
+                },
+                {
+                    id: 43,
+                    name: "Invoquer Poupée de sang",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CR% :Placez une invocation Poupée de sang dans l'arène d'un joueur ciblé.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Poupée de sang",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 0,
+                        life: 2,
+                        recover: 0,
+                        number: 5,
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Maudit 1 : à la fin de chaque manche, placez 1 blessure sur votre Héritier.<br/>Automutilation 1 : %S% 1%B% : Infligez 1 dégât à cette unité.",
+                            },
+                        ],
+                    },
+                    tags: [1,2,3,12,13,16,19,20,22,],
+                },
+                {
+                    id: 44,
+                    name: "Couper les ficelles",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CR% 1%B% : Infligez 2 dégâts à une unité que vous contrôlez. Dans ce cas, vous pouvez défausser un sort d'altération ciblé.",
+                        },
+                    ],
+                    tags: [3,12,13,16,27,52,],
+                },
+                {
+                    id: 45,
+                    name: "Cœur éternel",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Raviver : 2%B%",
+                        },
+                    ],
+                    life: "+2",
+                    recover: "+2",
+                    tags: [5,6,9,13,16,25,44,53,],
+                },
+                {
+                    id: 46,
+                    name: "Redirection",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CE%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort lorsque votre Héritier recevrait 1 dégât ou plus et que vous contrôlez au moins 1 unité. N'infligez pas ces dégâts à votre Héritier. Infligez-les plutôt à une unité ciblée que vous contrôlez.",
+                        },
+                    ],
+                    tags: [7,9,16,27,52,],
+                },
+                {
+                    id: 47,
+                    name: "Dernier souffle",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%PR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort lorsqu'une unité que vous contrôlez est détruite. Infligez 2 dégâts à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    tags: [7,12,16,19,20,23,24,],
+                },
+                {
+                    id: 48,
+                    name: "Archer de sang",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CE% 1%CR% 2%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Serment de sang 2 : Lorsque vous annoncez vos attaquants, vous pouvez ajouter 2 à la valeur d'attaque de cette unité jusqu'à la fin du tour. Dans ce cas, placez 2 blessures sur cette unité.<br/>Avantage au combat : Lorsque cette unité combat, elle inflige ses dégâts avant que les autres unités sans Avantage au combat n'infligent les leurs.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 3,
+                    recover: 2,
+                    tags: [8,12,13,16,26,49,52,],
+                },
+                {
+                    id: 49,
+                    name: "Poupée vivante",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CE% 1%CR% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Souffrance partagée : Lorsque cette unité subit des dégâts, vous pouvez payer 1%B% pour infliger X dégâts à une unité ou Héritier ciblé.<br/>X = le ou les dégâts subis ou les PV de cette unité, en choisissant la valeur la moins élevée.",
+                        },
+                    ],
+                    attack: 0,
+                    life: 3,
+                    recover: 1,
+                    tags: [8,9,12,13,17,19,20,21,23,52,],
+                },
+                {
+                    id: 50,
+                    name: "Guerrier sangsue",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 2%CR% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Drain de l'ombre 1 : Lorsque cette unité subit au moins 1 de dégât, vous pouvez choisir 1 dé dans la réserve active d'un joueur ciblé et le placer dans sa réserve inactive.",
+                        },
+                    ],
+                    attack: 2,
+                    life: 3,
+                    recover: 3,
+                    tags: [8,12,13,16,31,52,54,],
+                },
+                //*/
+                //*/
+                {
+                    id: 51,
+                    name: "Dissipation",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Détruisez cette unité à la fin de la manche. Si l'unité détruite est un allié, retirez-la du jeu.",
+                        },
+                    ],
+                    tags: [5,6,10,13,16,41,55,],
+                },
+                {
+                    id: 52,
+                    name: "Riposte de l'ombre",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CI% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort après que votre Héritier ait subi des dégâts d'une attaque. Inflgez 6 dégâts à une unité ciblée que votre adversaire contrôle.",
+                        },
+                    ],
+                    tags: [7,10,16,19,21,23,],
+                },
+                {
+                    id: 53,
+                    name: "Au-delà de la mort",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Consultez votre défausse pour y prendre un allié et ajoutez-le à votre main.",
+                        },
+                    ],
+                    tags: [4,12,13,16,56,],
+                },
+                {
+                    id: 54,
+                    name: "Matérialisation",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 2%CR%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Ce sort ne peut être lié qu'à des unités ayant la capacité Illusion. Cette unité n'est plus considérée comme ayant la capacité Illusion.<br/>Raviver : 2%B%",
+                        },
+                    ],
+                    attack: "+2",
+                    life: "+1",
+                    tags: [5,6,12,13,16,25,26,44,57,],
+                },
+                {
+                    id: 55,
+                    name: "Tour de passepasse",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%PI% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Piochez 3 cartes.",
+                        },
+                    ],
+                    tags: [4,10,13,16,29,],
+                },
+                {
+                    id: 56,
+                    name: "Invoquer Veuves dormeuses",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "2%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort lorsqu'une unité que vous contrôlez est détruite.Placez jusqu'à 2 invocations Veuve dormeuse dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Veuve dormeuse",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 2,
+                        life: 1,
+                        recover: 0,
+                        number: 5,
+                    },
+                    tags: [1,2,7,12,16,24,],
+                },
+                {
+                    id: 57,
+                    name: "Sacrifice mineur",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CR% : infligez 1 dégât à une unité ciblée que vous contrôlez. Dans ce cas, vous pouvez infliger 1 dégât à une unité ciblée qu'un adversaire contrôle.<br/>Concentration 1 : Si les deux unités ciblées non épuisées, vous pouvez placer 1 jeton Épuisement au lieu d'infliger 1 dégât sur chacune de ces deux unités.",
+                        },
+                    ],
+                    tags: [3,12,13,16,18,19,21,23,38,52,],
+                },
+                {
+                    id: 58,
+                    name: "Invoquer Loup masqué",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% 1%CI% 1%B% : Placez une invocation Loup masqué dans votre arène.<br/>Concentration 1 : Le cout d'activation peut être remplacé par : %S% %E% 1%CR%",
+                        },
+                    ],
+                    invocation: {
+                        name: "Loup masqué",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 2,
+                        life: 1,
+                        recover: 0,
+                        number: 5,
+                    },
+                    tags: [1,2,3,10,13,14,16,18,43,],
+                },
+                {
+                    id: 59,
+                    name: "Invoquer Faux démon",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CI% 1%B%",
+                        },
+                    ],
+                    invocation: {
+                        name: "Faux démon",
+                        type: "Unité",
+                        placement: "Arène",
+                        attack: 1,
+                        life: 4,
+                        recover: 0,
+                        number: 5,
+                        firstEpInEp: "Ep",
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Protecteur d'unité : Cette unité peut protéger une unité qui se fait attaquer.",
+                            },
+                            {
+                                type: "InEp",
+                                effect: "Illusion : Détruisez cette unité si elle subit des dégâts de l'attaque/contrattaque d'une autre unité.",
+                            }
+                        ],
+                    },
+                    tags: [1,2,3,10,13,16,27,28,57,],
+                },
+                {
+                    id: 60,
+                    name: "Tireur d'élite boréalis",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CI% 1%CR% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Embuscade 2 : Lorsque cette unité entre en jeu, vous pouvez infliger 2 dégâts à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    attack: 2,
+                    life: 1,
+                    recover: 1,
+                    tags: [4,10,12,13,17,19,20,21,23,],
+                },
+                //*/
+                //*/
+                {
+                    id: 61,
+                    name: "Chant de protection",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%B% 1%D%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Lorsque ce sort entre en jeu, placez 3 jetons État dessus. Défaussez ce sort lorsqu'il n'y a plus de jetons État dessus.",
+                        },
+                        {
+                            type: "Ep",
+                            effect: "Lorsque votre Héritier subirait 1 dégât ou plus, retirez de ce sort autant de jetons État que vous voulez. Empêchez 1 dégât à votre Héritier pour chaque jeton retiré.",
+                        },
+                    ],
+                    tags: [3,13,15,27,35,58],
+                },
+                {
+                    id: 62,
+                    name: "Chant des morts",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Lorsqu'un allié que vous contrôlez est détruit, vous pouvez placer un jeton État sur ce sort.",
+                        },
+                        {
+                            type: "Ep",
+                            effect: "Durant votre tour, s'il y a au moins 3 jetons État sur ce sort, vous pouvez défausser ce sort pour choisir jusqu'à 3 dés de votre réserve inactive et les placer dans votre réserve active, chacun sur la face de votre choix.",
+                        },
+                    ],
+                    tags: [3,12,13,16,24,31,32,34,35,],
+                },
+                {
+                    id: 63,
+                    name: "Invoquer Terreur spectrale",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 3%CR% : Placez une invocation Terreur spectrale dans votre arène.<br/>Concentration 2 : Vous pouvez retirer 1 jeton Épuisement d'une Terreur spectrale que vous contrôlez.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Terreur spectrale",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Rage 1 : Pour chaque blessure sur cette unité, ajoutez 1 à la valeur d'attaque de cette unité.",
+                            },
+                        ],
+                        attack: 1,
+                        life: 6,
+                        recover: 0,
+                        number: 2,
+                    },
+                    tags: [1,2,3,12,13,16,18,26,52,],
+                },
+                {
+                    id: 64,
+                    name: "Poison",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Après avoir effectué une action pricipale autre que passer, infligez 1 dégât à cette unité.",
+                        },
+                    ],
+                    tags: [5,6,12,13,16,19,21,23,52,],
+                },
+                {
+                    id: 65,
+                    name: "Strangulation",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort lorsqu'un adversaire activerait la capacité non inépuisable d'une unité ou de son Héritier. Annulez les effets de cette capacité jusqu'à la fin du tour.",
+                        },
+                    ],
+                    tags: [7,12,16,40,],
+                },
+                {
+                    id: 66,
+                    name: "Chaînes de sang",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choisissez une unité que vous contrôlez et détruisez-la. Placez X jetons Épuisement sur une unité ciblée.<br/>X = la valeur de PV de l'unité choisie moins le nombre de blessures sur l'unité choisie.",
+                        },
+                    ],
+                    tags: [4,12,13,16,38,51,],
+                },
+                {
+                    id: 67,
+                    name: "Régression",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CR% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Lorsque vous liez ce sort, défaussez tous les autres sorts d'altération liés à cette unité.",
+                        },
+                    ],
+                    attack: "-5",
+                    tags: [5,6,12,13,16,59,],
+                },
+                {
+                    id: 68,
+                    name: "Ninja de Sombreciel",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CR% 2%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Frappe du sceau 1 : Lorsque cette unité entre en jeu, vous pouvez payer 1%B% pour placer 1 jeton Épuisement sur un sort préparatoire ciblé.<br/>Frappe de l'ombre 2 : %P% %E% : Infligez 2 dégâts à une unité ciblée.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 2,
+                    recover: 2,
+                    tags: [8,12,13,16,19,21,23,38,43],
+                },
+                {
+                    id: 69,
+                    name: "Archer de feu",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Embuscade 1 : Lorsque cette unité entre en jeu, vous pouvez infliger 1 dégât à une unité ou un Héritier ciblé.",
+                        },
+                    ],
+                    attack: 1,
+                    life: 1,
+                    recover: 0,
+                    tags: [8,12,13,16,19,20,21,23,],
+                },
+                {
+                    id: 70,
+                    name: "Artificier écarlate",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 2%CR%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Détonation 3 : %S% : Détruisez cette unité pour placer 1 blessure sur 3 unités ciblées ou moins.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 2,
+                    recover: 0,
+                    tags: [8,12,13,14,16,19,21,22,51,],
+                },
+                //*/
+                //*/
+                {
+                    id: 71,
+                    name: "Rayon de glace",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 2%CN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Infligez 2 dégâts à une unité ciblée.<br/>Retirez 2 jetons État de cette unité.",
+                        },
+                    ],
+                    tags: [4,11,13,16,19,21,23,35,],
+                },
+                {
+                    id: 72,
+                    name: "Morsure du froid",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CN% : Infligez 1 dégât à une unité ou un Héritier ciblé.<br/>Concentration 1 : Vous pouvez changer le cout d'activation de cette capacité en %P% %E% 1%B%.",
+                        },
+                    ],
+                    tags: [3,11,13,15,16,18,19,20,21,23,],
+                },
+                {
+                    id: 73,
+                    name: "Piège de glace",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez jouer ce sort après l'entrée en jeu d'une unité qui a 2PV ou moins.<br/>Détruisez cette unité ciblée.",
+                        },
+                    ],
+                    tags: [7,11,16,40,55,],
+                },
+                {
+                    id: 74,
+                    name: "Invoquer Golem de glace",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 2%CN% 1%B% : Placez une invocation Golem de glace dans votre arène.<br/>Concentration 2 : Vous pouvez retirer 1 blessure de chacun des Golems de glace que vous contrôlez.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Golem de glace",
+                        type: "Invocation",
+                        placement: "arène",
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Évoluderme 2 : Si au moins 1 sort d'altération est lié à cette unité, ajoutez 2 à la valeur de ses PV.",
+                            },
+                        ],
+                        attack: 3,
+                        life: 2,
+                        recover: 0,
+                        number: 3,
+                    },
+                    tags: [1,2,3,11,13,16,18,25,39,],
+                },
+                {
+                    id: 75,
+                    name: "Invoquer Ours pics de givre",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%PN%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CN% 1%B% : Placez une invocation Ours pics de givre dans votre arène.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Ours pics de givre",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Gel 1 : Lorsque cette unité inflige des dégâts à une autre unité, vous pouvez payer 1%B% pour placer 1 jeton Épuisement sur cette dernière.<br/>Rancune 1 : Lorsque cette unité inflige des dégâts à un Héritier en attaquant, vous pouvez infliger 1 dégât de plus à cet Héritier.",
+                            },
+                        ],
+                        attack: 2,
+                        life: 3,
+                        recover: 0,
+                    },
+                    tags: [1,2,3,11,13,16,19,20,23,38,],
+                },
+                {
+                    id: 76,
+                    name: "Bouclier de cristal",
+                    type: "Sort d'altération",
+                    placement : "Unité",
+                    cost: "%P% 1%CN% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: " Désormais, cette unité a cette capacité :<br/>Protecteur d'unité : Cette unité peut protéger une unité qui se fait attaquer.",
+                        },
+                    ],
+                    life: "+2",
+                    tags: [5,6,11,13,16,25,27,28,],
+                },
+                {
+                    id: 77,
+                    name: "Couronne de glace",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CN% 2%B%",
+                    attack: "+3",
+                    tags: [5,6,11,13,16,26,],
+                },
+                {
+                    id: 78,
+                    name: "Glaciation",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CN%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Lorsque vous liez ce sort, placez 3 jetons État sur ce sort. Défaussez ce sort lorsqu'il n'y a plus de jetons État dessus. Tant que ce sort est lié à cette unité, cette unité est considérée comme étant épuisée.<br/>Désormais, cette unité a cette capacité :<br/>Dégel : %S% Retirez 1 jeton État d'un sort d'altération Glaciation lié à cette unité.",
+                        },
+                    ],
+                    tags: [5,6,11,13,16,35,38,],
+                },
+                {
+                    id: 79,
+                    name: "Fureur de Rin",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 3%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Vous pouvez choisir jusqu'à 5 dés de votre réserve inactive, les relancer, puis les placer dans votre réserve active. Ensuite, vous pouvez payer autant de %PN% parmi ceux que vous venez de relancer pour infligez autant de dégâts à une unité ou Héritier ciblé.",
+                        },
+                    ],
+                    tags: [4,11,13,15,16,19,20,21,23,31,32,33,43,],
+                },
+                {
+                    id: 80,
+                    name: "Croc de glace",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%PN%",
+                    firstEpInEp: "InEp",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "Guérison rapide 1 : Lorsque cette unité subirait des dégâts, vous pouvez payer autant de %B% que vous voulez. Pour chaque %B% payé, empêchez 1 dégât à cette unité.",
+                        },
+                        {
+                            type: "Ep",
+                            effect: "Avantage au combat : Lorsque cette unité combat, elle inflige ses dégâts avant que les autres unités sans Avantage au combat n'infligent les leurs.",
+                        },
+                    ],
+                    attack: 1,
+                    life: 1,
+                    recover: 1,
+                    tags: [8,11,13,16,27,49,],
+                },
+                {
+                    id: 81,
+                    name: "Anguish",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 2%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choose a target Phoenixborn. Its controlling player may discard 1 card at random from thier hand. If they do not or cannot, place 2 wound tokens on that Phoenixborn. Then choose a target Phoenixborn. Its controlling player may move 2 dice of your choice form thier active pool to their exhausted pool. If they do not or cannot, place 2 wounds tokens on that Phoenixborn.",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 82,
+                    name: "Beast tamer",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 1%PE% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Diminish 1: After an opponent has declared attackers, you may spend 1%B% to reduce the attack value of each attacking unit by 1 for the remainder of this turn.",
+                        },
+                    ],
+                    attack: 3,
+                    life: 3,
+                    recover: 2,
+                    tags: [],
+                },
+                {
+                    id: 83,
+                    name: "Amplify",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 1%CE%",
+                    effects: [
+                        {
+                            type: "InEp",
+                            effect: "X = the number of charm dice on this unit.<br/>Raviver: 1%B%",
+                        },
+                    ],
+                    attack: "+X",
+                    life: "+X",
+                    recover: "+X",
+                    tags: [],
+                },
+                {
+                    id: 84,
+                    name: "Change psyche",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Remove 1 exhaustion token from a target unit or place 1 exhaustion toke on a target unit.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 85,
+                    name: "Dispel",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Remove 2 status tokens from a target card or choose a target alteration spell. If that alteration spell is a conjured alteration spell, return it to its owner's conjuration pile. Otherwise, shuffle it into its owner's draw pile.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 86,
+                    name: "Memory theft",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CE%: Look at a target player's hand. That player may discard 1 card of your choice from that hand. If they do not or cannot, place 1 wound token on their Phoenixborn.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 87,
+                    name: "Mind probe",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P% 1%CE%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Choose a target opponent to reveal the top 5 cards of their draw pile. Choose 1 of those revealed cards and remove it from the game. Return the rest of the revealed cards to the top of that opponent's draw pile in the order of your choice.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 88,
+                    name: "Remorse",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%CE% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "You may play this spell after an opponent takes an Attack a Phoenixborn main action or Attack a Unit main action. Deal 2 damage to a target Phoenixborn. The player that controls that Phoenixborn must discard 2 cards off the top of their draw pile. If they cannot, deal 1 additional damage to their Phoenixborn.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 89,
+                    name: "Summon Nightshade Swallow",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 2%CE%: Place a Nightshade Swallow conjuration onto your battlefield.<br/>Focus 1: You may choose a target player to discard 1 card off the top of their draw pile if you have fewer dice in your active pool than an opponent.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Nightshade Swallow",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "Deathstrike: When this unit deals 1 or more damage to a unit it is attacking or counterin, destroy the unit that received damage.",
+                            },
+                        ],
+                        attack: 1,
+                        life: 2,
+                        recover: 1,
+                        number: 5
+                    },
+                    tags: [],
+                },
+                {
+                    id: 90,
+                    name: "Summon Orchid Dove",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%CE%: Place an Orchid Dove conjuration onto your battlefield.<br/> Focus 1: You may change the activation cost of this spell to %P% %E% 1%B%<br/>Focus 2: You may deal 1 damage to a target player's Phoenixborn if they do not have any cards in their draw pile.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Orchid Dove",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Peaceful Melody: Your opponents cannot take an Attack a Phoenixborn main action or Attack a Unit main action. During their turn an opponent may spend 1%B%. If they do, all units are no longer considered to have the Peaceful Melody for the remainder of that turn.",
+                            },
+                        ],
+                        attack: 1,
+                        life: 1,
+                        recover: 0,
+                        number: 5
+                    },
+                    tags: [],
+                },
+                {
+                    id: 91,
+                    name: "Illusionary cycle",
+                    type: "Sort d'action",
+                    placement: "Défausse",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Select 1 illusion die in your exhausted pool and place it into your active pool on a side of your choice. Shuffle this card into your draw pile.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 92,
+                    name: "Body inversion",
+                    type: "Sort d'altération",
+                    placement: "Unité",
+                    cost: "%P% 2%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "This spell cannot be attached to a unit that already has a spell with the word \Inversion\" in its title attached to it.<br/>When attaching this spell to a unit that has the Illusion ability, the player that played this spell may select 2 illusion dice in their exhausted pool and place them into their active pool on a side of their choice.",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "switch this unit's printed attack and life values.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 93,
+                    name: "Figures in the fog",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "2%CE%, 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "You may play this spell when an opponent chooses to counter with a unit they control. Prevent all damage the attacking unit or units would receive from the countering unit in this battle.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 94,
+                    name: "Particle shield",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "You may play this spell when a unit you control would receive 1 or more damage. This spell may be played even if you have already played reaction spells this turn. prevent 1 damage to that unit. shuffle this card into your draw pile.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 95,
+                    name: "Secret door",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P% 1%CI% 1%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "After a recation spell is played and its effets have been resolved, you may place 1 exhaustion token on this spell to draw 1 card, or discard this card to take the reaction spell just played from its owner's discard pile and place it in its owner's hand.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 96,
+                    name: "Summon Shadow hound",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 3%CI% Place a Shadow hound conjuration onto your battlefield.<br/>Focus 1: You may deal 1 damage to a target unit.<br/>Focus 2: Then you may deal 1 damage to a target unit.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Shadow hound",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Illusion: If this unit receives damage as a result of a unit's attack or counter, destroy this unit.",
+                            },
+                        ],
+                        attack: 3,
+                        life: 5,
+                        recover: 0,
+                        number: 3
+                    },
+                    tags: [],
+                },
+                {
+                    id: 97,
+                    name: "Summon Shadow Spirit",
+                    type: "Sort préparatoire",
+                    placement: "Grimoire",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%P% %E% 1%PI%: Place a Shadow spirit conjuration onto your battlefield.",
+                        },
+                    ],
+                    invocation: {
+                        name: "Shadow spirit",
+                        type: "Invocation",
+                        placement: "Arène",
+                        effects: [
+                            {
+                                type: "InEp",
+                                effect: "Illusion: If this unit receives damage as a result of a unit's attack or counter, destroy this unit.<br/>X = the number of Summon Shadow spirit spells on your spellboard.",
+                            },
+                        ],
+                        attack: 2,
+                        life: "X",
+                        recover: 0,
+                        number: 4
+                    },
+                    tags: [],
+                },
+                {
+                    id: 98,
+                    name: "To shadows",
+                    type: "Sort préparatoire",
+                    placement: "Arène",
+                    cost: "%P%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "%S% %E% 1%CI%: choose a target unit to gain the following ability for the remainder of this turn:",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "Illusion: If this unit receives damage as a result of a unit's attack or counter, destroy this unit.<br/>X = the number of Summon Shadow spirit spells on your spellboard.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 99,
+                    name: "Vanish",
+                    type: "Sort réactif",
+                    placement: "Défausse",
+                    cost: "2%CI%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "You may play this spell when an opponent would use a spell, ability, or dice power that targets you, your draw pile, your discard pile, or your Phoenixborn. Cencel the effects of that spell, ability, or dice power.",
+                        },
+                    ],
+                    tags: [],
+                },
+                {
+                    id: 100,
+                    name: "Flash archer",
+                    type: "Allié",
+                    placement: "Arène",
+                    cost: "%P% 2%CI% 2%B%",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "Double shot 1: %S% %E%: Deal 1 damage to a target unit. Then you may deal 1 damage to a target unit.",
+                        },
+                    ],
+                    attack: 4,
+                    life: 2,
+                    recover: 2,
+                    tags: [],
+                },
+                /*
+                {
+                    id: ,
+                    name: "",
+                    type: "",
+                    placement: "",
+                    cost: "",
+                    effects: [
+                        {
+                            type: "Ep",
+                            effect: "",
+                        },
+                        {
+                            type: "InEp",
+                            effect: "",
+                        },
+                    ],
+                    attack: ,
+                    life: ,
+                    recover: ,
+                    invocation: {
+                        name: "",
+                        type: "",
+                        placement: "",
+                        effects: [
+                            {
+                                type: "Ep",
+                                effect: "",
+                            },
+                            {
+                                type: "InEp",
+                                effect: "",
+                            },
+                        ],
+                        attack: ,
+                        life: ,
+                        recover: ,
+                        number:
+                    },
+                    tags: [],
+                },
+                */
+            ];
+
+            var tags = {
+                1 :"Invocation",//15
+                2 :"Invocation : Unité",//15
+                3 :"Sort préparatoire",//29
+                4 :"Sort d'action",//19
+                5 :"Sort d'altération",//12
+                6 :"Sort d'altération : Unité",//12
+                7 :"Sort réactif",//8
+                8 :"Allié",//13
+
+                9 :"Magie d'envoutement",//15
+                10:"Magie d'illusion",//17
+                11:"Magie naturelle",//25
+                12:"Magie rituelle",//26
+                13:"Action principale",//68
+                14:"Action secondaire",//10
+                15:"Aucune sphère",//11
+                16:"Mono-sphère",//59
+                17:"Bi-sphère",//12
+
+                18:"Concentration",//12
+                19:"Dégâts directs",//25
+                20:"Dégâts directs à un héritier",//13
+                21:"Dégâts directs à une unité",//21
+                22:"Placer des blessures",//6
+                23:"Infliger des dégâts",//21
+                24:"Lorsqu'une unité est détruite",//7
+                25:"Bonus de PV",//7
+                26:"Bonus d'attaque",//7
+                27:"Protection",//10
+                28:"Protecteur d'unité",//4
+                29:"Pioche",//7
+                30:"Chercher dans la pioche",//1
+                31:"Gérer les dés",//8
+                32:"Récupérer des dés",//5
+                33:"Relancer des dés",//3
+                34:"Tourner des dés",//4
+                35:"Jeton État",//9
+                36:"Action supplémentaire",//1
+                37:"Retirer des jetons Épuisement",//2
+                38:"Épuiser",//11
+                39:"Soin",//4
+                40:"Contre",//3
+                41:"Retirer du jeu",//2
+                42:"Imblocable",//1
+                43:"Lié",//8
+                44:"Raviver",//4
+                45:"Éphémère",//2
+                46:"Sort protégé",//2
+                47:"Meule",//4
+                48:"Faire Défausser",//1
+                49:"Avantage au combat",//3
+                50:"Protection magique",//1
+                51:"Sacrifice",//4
+                52:"Suicide",//9
+                53:"Bonus de regain",//1
+                54:"Épuisement de dés",//1
+                55:"Détruire une unité",//2
+                56:"Récupération de la défausse",//1
+                57:"Illusion",//2
+                58:"Défausse",//1
+                59:"Malus de PV",//1
+            };
+
+            function linkCardAndPB(pB){
+                var card = findById(cards, pB.linkedCardId);
+                pB.linkedCard = card;
+                card.linkedPBId = pB.id;
+                card.linkedPBName = pB.name;
+            }
+            pBs.forEach(linkCardAndPB);
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,6 @@
+1.1.2 :
+* Ajout des promos et nouveaux decks en anglais (en attendant la vf)
+* La sauvegarde se fait maintenant en téléchargeant un fichier
+* Le chargement des decks se fait maintenant à partir d'un fichier texte
+* Il est maintenant possible d'éditer ses decks
+* Les preconstruits récents sont maintenant en haut de la liste des préconstruits
