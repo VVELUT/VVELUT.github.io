@@ -754,7 +754,6 @@
                         card.number++;
                         wipDeck.cards[card.card.id]++;
                         vm.cardsCpt++;
-                        wipDeck.cardsCpt++;
                     }
                 };
                 vm.cardMinus = function(card) {
@@ -762,14 +761,12 @@
                         card.number--;
                         wipDeck.cards[card.card.id]--;
                         vm.cardsCpt--;
-                        wipDeck.cardsCpt--;
                     }
                     if(card.number == 0 && card.first){
                         vm.cardFive(card);
                     }
                 };
                 vm.cardDelete = function(card) {
-                    wipDeck.cardsCpt -= card.number;
                     card.number = 0;
                     vm.cardFive(card);
                     delete wipDeck.cards[card.card.id];
@@ -794,7 +791,6 @@
                         die.number++;
                         wipDeck.dice[die.die.id]++;
                         vm.diceCpt++;
-                        wipDeck.diceCpt++;
                     }
                 };
                 vm.dieMinus = function(die) {
@@ -802,11 +798,9 @@
                         die.number--;
                         wipDeck.dice[die.die.id]--;
                         vm.diceCpt--;
-                        wipDeck.diceCpt--;
                     }
                 };
                 vm.dieDelete = function(die) {
-                    wipDeck.diceCpt -= die.number;
                     delete wipDeck.dice[die.die.id];
                     $rootScope.$broadcast('wipChanged');
                 }
@@ -834,9 +828,7 @@
                 };
                 vm.deleteDeck = function(deck) {
                     var index = $scope.decks.findIndex(function(elt){ return elt.id == deck.id});
-                    console.log(index, deck);
                     $scope.decks.splice(index, 1);
-                    console.log($scope.decks);
                 };
                 vm.save = function() {
                     wipDeck.name = vm.name;
@@ -848,9 +840,9 @@
                     for( elt in wipDeck.dice){
                         if(wipDeck.dice[elt])diceNotZero[elt] = wipDeck.dice[elt];
                     }
-
                     wipDeck.cards = cardsNotZero;
                     wipDeck.dice = diceNotZero;
+
                     if(wipDeck.id){
                         $scope.decks[$scope.decks.findIndex(function(elt){ return elt.id == wipDeck.id})] = $.extend(true, {}, wipDeck);
                     } else {
@@ -913,7 +905,6 @@
                     if(wipDeck.pB){
                         if(wipDeck.pB == pB.id) return;
                         var old = findById(pBs,wipDeck.pB);
-                        wipDeck.cardCpt -= wipDeck.cards[old.linkedCardId];
                         delete wipDeck.cards[old.linkedCardId];
                     }
 
@@ -932,7 +923,7 @@
                 vm.tags = {
                     type: [1,3,4,5,7,8,43,],
                     cost: [9,10,11,12,13,14,15,16,17,58,],
-                    mecanism: [18,19,24,25,26,27,29,31,35,38,39,40,44,47,51,52,],
+                    mecanism: [18,19,24,25,26,27,29,31,35,38,39,40,44,47,51,52,57],
                 };
                 vm.filters = [];
 
@@ -1029,7 +1020,6 @@
             ]);
             app.filter('reverse', function() {
               return function(items) {
-                  //console.log($.type(items))
                 return items.slice().reverse();
               };
             });
@@ -1479,7 +1469,7 @@
                     attack: 3,
                     life: 3,
                     recover: 3,
-                    tags: [],
+                    tags: [8,15,37],
                 },
                 {
                     id: -2,
@@ -1496,7 +1486,7 @@
                     attack: 2,
                     life: 5,
                     recover: 3,
-                    tags: [],
+                    tags: [8,15,37],
                 },
                 {
                     id: -1,
@@ -1510,7 +1500,7 @@
                             effect: "Deal 4 damage to a target unit. Deal 2 damage to a target Phoenixborn.",
                         },
                     ],
-                    tags: [],
+                    tags: [4,15,19,20,21,23],
                 },
                 //*/
                 {
@@ -2363,7 +2353,7 @@
                     attack: 3,
                     life: 3,
                     recover: 2,
-                    tags: [8,12,13,16,26,49,52,],
+                    tags: [8,12,13,17,26,49,52,],
                 },
                 {
                     id: 49,
@@ -2950,7 +2940,7 @@
                             effect: "",
                         },
                     ],
-                    tags: [],
+                    tags: [4,13,15,19,20,22,31,48,54],
                 },
                 {
                     id: 82,
@@ -2967,7 +2957,7 @@
                     attack: 3,
                     life: 3,
                     recover: 2,
-                    tags: [],
+                    tags: [8,9,13,16,60],
                 },
                 {
                     id: 83,
@@ -2984,7 +2974,7 @@
                     attack: "+X",
                     life: "+X",
                     recover: "+X",
-                    tags: [],
+                    tags: [5,6,9,13,16,25,26,44,53],
                 },
                 {
                     id: 84,
@@ -2998,7 +2988,7 @@
                             effect: "Remove 1 exhaustion token from a target unit or place 1 exhaustion toke on a target unit.",
                         },
                     ],
-                    tags: [],
+                    tags: [4,9,13,16,37,38],
                 },
                 {
                     id: 85,
@@ -3012,7 +3002,7 @@
                             effect: "Remove 2 status tokens from a target card or choose a target alteration spell. If that alteration spell is a conjured alteration spell, return it to its owner's conjuration pile. Otherwise, shuffle it into its owner's draw pile.",
                         },
                     ],
-                    tags: [],
+                    tags: [4,13,15,27,35],
                 },
                 {
                     id: 86,
@@ -3026,7 +3016,7 @@
                             effect: "%P% %E% 1%CE%: Look at a target player's hand. That player may discard 1 card of your choice from that hand. If they do not or cannot, place 1 wound token on their Phoenixborn.",
                         },
                     ],
-                    tags: [],
+                    tags: [3,9,13,16,19,20,22,48],
                 },
                 {
                     id: 87,
@@ -3040,7 +3030,7 @@
                             effect: "Choose a target opponent to reveal the top 5 cards of their draw pile. Choose 1 of those revealed cards and remove it from the game. Return the rest of the revealed cards to the top of that opponent's draw pile in the order of your choice.",
                         },
                     ],
-                    tags: [],
+                    tags: [4,9,13,16,41,47],
                 },
                 {
                     id: 88,
@@ -3054,7 +3044,7 @@
                             effect: "You may play this spell after an opponent takes an Attack a Phoenixborn main action or Attack a Unit main action. Deal 2 damage to a target Phoenixborn. The player that controls that Phoenixborn must discard 2 cards off the top of their draw pile. If they cannot, deal 1 additional damage to their Phoenixborn.",
                         },
                     ],
-                    tags: [],
+                    tags: [7,9,16,16,20,23,47],
                 },
                 {
                     id: 89,
@@ -3075,7 +3065,7 @@
                         effects: [
                             {
                                 type: "Ep",
-                                effect: "Deathstrike: When this unit deals 1 or more damage to a unit it is attacking or counterin, destroy the unit that received damage.",
+                                effect: "Deathstrike: When this unit deals 1 or more damage to a unit it is attacking or countering, destroy the unit that received damage.",
                             },
                         ],
                         attack: 1,
@@ -3083,7 +3073,7 @@
                         recover: 1,
                         number: 5
                     },
-                    tags: [],
+                    tags: [1,2,3,9,13,16,18,47,55],
                 },
                 {
                     id: 90,
@@ -3112,7 +3102,7 @@
                         recover: 0,
                         number: 5
                     },
-                    tags: [],
+                    tags: [1,2,3,9,13,16,18,19,20,23,47],
                 },
                 {
                     id: 91,
@@ -3126,7 +3116,7 @@
                             effect: "Select 1 illusion die in your exhausted pool and place it into your active pool on a side of your choice. Shuffle this card into your draw pile.",
                         },
                     ],
-                    tags: [],
+                    tags: [4,10,13,16,31,32,34,61],
                 },
                 {
                     id: 92,
@@ -3144,21 +3134,21 @@
                             effect: "switch this unit's printed attack and life values.",
                         },
                     ],
-                    tags: [],
+                    tags: [5,6,10,13,16,31,32,34,57],
                 },
                 {
                     id: 93,
                     name: "Figures in the fog",
                     type: "Sort réactif",
                     placement: "Défausse",
-                    cost: "2%CE%, 1%B%",
+                    cost: "2%CI%, 1%B%",
                     effects: [
                         {
                             type: "Ep",
                             effect: "You may play this spell when an opponent chooses to counter with a unit they control. Prevent all damage the attacking unit or units would receive from the countering unit in this battle.",
                         },
                     ],
-                    tags: [],
+                    tags: [7,10,16,27],
                 },
                 {
                     id: 94,
@@ -3169,10 +3159,10 @@
                     effects: [
                         {
                             type: "Ep",
-                            effect: "You may play this spell when a unit you control would receive 1 or more damage. This spell may be played even if you have already played reaction spells this turn. prevent 1 damage to that unit. shuffle this card into your draw pile.",
+                            effect: "You may play this spell when a unit you control would receive 1 or more damage. This spell may be played even if you have already played reaction spells this turn. Prevent 1 damage to that unit. shuffle this card into your draw pile.",
                         },
                     ],
-                    tags: [],
+                    tags: [7,15,27,61],
                 },
                 {
                     id: 95,
@@ -3183,10 +3173,10 @@
                     effects: [
                         {
                             type: "Ep",
-                            effect: "After a recation spell is played and its effets have been resolved, you may place 1 exhaustion token on this spell to draw 1 card, or discard this card to take the reaction spell just played from its owner's discard pile and place it in its owner's hand.",
+                            effect: "After a reaction spell is played and its effets have been resolved, you may place 1 exhaustion token on this spell to draw 1 card, or discard this card to take the reaction spell just played from its owner's discard pile and place it in its owner's hand.",
                         },
                     ],
-                    tags: [],
+                    tags: [3,10,13,16,29,56],
                 },
                 {
                     id: 96,
@@ -3215,7 +3205,7 @@
                         recover: 0,
                         number: 3
                     },
-                    tags: [],
+                    tags: [1,2,3,10,13,16,18,19,21,23,57],
                 },
                 {
                     id: 97,
@@ -3244,13 +3234,13 @@
                         recover: 0,
                         number: 4
                     },
-                    tags: [],
+                    tags: [1,2,3,10,13,16,57],
                 },
                 {
                     id: 98,
                     name: "To shadows",
                     type: "Sort préparatoire",
-                    placement: "Arène",
+                    placement: "Grimoire",
                     cost: "%P%",
                     effects: [
                         {
@@ -3262,7 +3252,7 @@
                             effect: "Illusion: If this unit receives damage as a result of a unit's attack or counter, destroy this unit.<br/>X = the number of Summon Shadow spirit spells on your spellboard.",
                         },
                     ],
-                    tags: [],
+                    tags: [3,10,13,14,16,57],
                 },
                 {
                     id: 99,
@@ -3273,10 +3263,10 @@
                     effects: [
                         {
                             type: "Ep",
-                            effect: "You may play this spell when an opponent would use a spell, ability, or dice power that targets you, your draw pile, your discard pile, or your Phoenixborn. Cencel the effects of that spell, ability, or dice power.",
+                            effect: "You may play this spell when an opponent would use a spell, ability, or dice power that targets you, your draw pile, your discard pile, or your Phoenixborn. Cancel the effects of that spell, ability, or dice power.",
                         },
                     ],
-                    tags: [],
+                    tags: [7,10,16,40],
                 },
                 {
                     id: 100,
@@ -3293,7 +3283,7 @@
                     attack: 4,
                     life: 2,
                     recover: 2,
-                    tags: [],
+                    tags: [8,10,13,15,16,19,21,13],
                 },
                 /*
                 {
@@ -3401,6 +3391,8 @@
                 57:"Illusion",//2
                 58:"Défausse",//1
                 59:"Malus de PV",//1
+                60:"Malus d'attaque",//1
+                61:"Retour dans la pioche",
             };
 
             function linkCardAndPB(pB){
