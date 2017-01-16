@@ -1,5 +1,11 @@
+2.2.4
+* Découpe en fichiers (en cours)
+* Traduction de Léo et Victoria
+* Ajout du bouton de reset des filtres
+* L'ordre alphabétique ne tient plus compte des accents
+
 1.1.3
-* tags pour les cartes de Léo, Victoria et promos
+* Tags pour les cartes de Léo, Victoria et promos
 
 1.1.2 :
 * Ajout des promos et nouveaux decks en anglais (en attendant la vf)
