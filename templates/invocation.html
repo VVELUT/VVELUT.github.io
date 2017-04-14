@@ -1,0 +1,19 @@
+<div ng-class="{ hasInvocation:invocationCtrl.invocation.invocation.name }">
+    <div class="name">{{invocationCtrl.invocation.name}}</div>
+    <div class="top-part">
+        <div class="subtitle">
+            <span class="type">{{invocationCtrl.invocation.type}}</span>
+            <span class="zone">{{invocationCtrl.invocation.placement}}</span>
+        </div>
+    </div>
+    <div class="bottom-part">
+        <div class="effect" ng-repeat="effect in invocationCtrl.invocation.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
+        <div class="stat">
+            <span class="attack">{{invocationCtrl.invocation.attack}}</span>
+            <span class="life">{{invocationCtrl.invocation.life}}</span>
+            <span class="recover">{{invocationCtrl.invocation.recover}}</span>
+            <span class="number">{{invocationCtrl.invocation.number}}</span>
+        </div>
+    </div>
+    <invocation ng-if="invocationCtrl.invocation.invocation" invocation="invocationCtrl.invocation.invocation"></invocation>
+</div>

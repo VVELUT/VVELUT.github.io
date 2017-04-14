@@ -1,0 +1,116 @@
+<div>
+    <div id="dkp1" class="deck-panel" ng-hide="decksCtrl.showCards()">
+        <div class="deck" ng-mouseover="decksCtrl.loadDeck(decksCtrl.wipDeck,0)" ng-click="decksCtrl.change()" ng-show="!decksCtrl.isWipEmpty()">
+            Deck en cours
+            <div class="buttons">
+                <a ng-click="decksCtrl.resetWipDeck(); $event.stopPropagation();">×</a>
+            </div>
+        </div>
+        <div>Decks construits :
+            <label class="import-file">
+                <input type="file" id="loadDeckInput" on-read-file="decksCtrl.showContent($fileContent)"/>
+                <span>Charger</span>
+            </label>
+            <a id="download-link" download="decks.txt" href="" ng-click="decksCtrl.download()">Sauvegarder</a>
+        </div>
+        <div ng-repeat="deck in decksCtrl.decks | reverse track by deck.id" class="deck" ng-mouseover="decksCtrl.loadDeck(deck,1)" ng-click="decksCtrl.change()">
+            {{ deck.name }}
+            <div class="buttons">
+                <a ng-click="decksCtrl.deleteDeck(deck); $event.stopPropagation();">×</a>
+            </div>
+        </div>
+        <div>Decks préconstruits :</div>
+        <div ng-repeat="deck in decksCtrl.decksPreconstruits | reverse" class="deck" ng-mouseover="decksCtrl.loadDeck(deck,2)" ng-click="decksCtrl.change()">
+            {{ deck.name }}
+        </div>
+    </div>
+    <div id="dkp2" class="deck-panel">
+        <a href="" ng-click="decksCtrl.change()">
+            {{ decksCtrl.text }}
+        </a>
+        <input type="text" id="deckName" placeholder="Nom du deck" ng-show="decksCtrl.typeLoaded == 0" ng-model="decksCtrl.wipDeck.name"/>
+        <div class="pb" ng-mouseover="decksCtrl.loadDetail('pb',decksCtrl.pb)">
+            {{ decksCtrl.pb.name }}
+            <div class="buttons" ng-show="decksCtrl.typeLoaded == 0">
+                <span>
+                    Cartes : {{ decksCtrl.cardsCpt }} |
+                    Dés : {{ decksCtrl.diceCpt }}</span>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" ng-class="{ linked: card.card.linkedPbId, firstFive: card.first }" ng-repeat="card in decksCtrl.cards|localeCompareString" ng-mouseover="decksCtrl.loadDetail('card',card.card)">
+                {{ card.number }} x {{ card.card.name }}
+                <div class="buttons" ng-show="decksCtrl.typeLoaded == 0">
+                    <a ng-click="decksCtrl.cardFive(card)">5</a>
+                    <a ng-click="decksCtrl.cardMinus(card)">-</a>
+                    <a ng-click="decksCtrl.cardPlus(card)">+</a>
+                    <a ng-click="decksCtrl.cardDelete(card)">×</a>
+                </div>
+            </div>
+        </div>
+        <div class="dice">
+            <div class="die" ng-repeat="die in decksCtrl.dice" ng-mouseover="decksCtrl.loadDetail('die',die.die)">
+                {{ die.number }} x {{ die.die.name }}
+                <div class="buttons" ng-show="decksCtrl.typeLoaded == 0">
+                    <a ng-click="decksCtrl.dieMinus(die)">-</a>
+                    <a ng-click="decksCtrl.diePlus(die)">+</a>
+                    <a ng-click="decksCtrl.dieDelete(die)">×</a>
+                </div>
+            </div>
+        </div>
+        <div class="save" ng-show="decksCtrl.wipIsValid()">
+            <a id="saveButton" ng-click="decksCtrl.save()">Sauvegarder</a>
+        </div>
+        <div class="edit" ng-show="decksCtrl.typeLoaded == 1">
+            <a id="editButton" ng-click="decksCtrl.copy(true)">Modifier</a>
+        </div>
+        <div class="copy" ng-show="decksCtrl.typeLoaded">
+            <a id="copyButton" ng-click="decksCtrl.copy(false)">Copier</a>
+        </div>
+    </div>
+    <div id="dkp3" class="deck-panel" ng-show="decksCtrl.showCards()">
+        <div>
+            <pb ng-show="decksCtrl.detail.type == 'pb'" pb="decksCtrl.detail.elt"></pb>
+            <card ng-show="decksCtrl.detail.type == 'card'" card="decksCtrl.detail.elt"></card>
+            <die ng-show="decksCtrl.detail.type == 'die'" die="decksCtrl.detail.elt"></die>
+        </div>
+        <div class="details">
+            <div ng-class="decksCtrl.details.tooMuchReady? 'invalid':'valid'">
+                <span>Sorts préparatoires</span>
+                <span>{{decksCtrl.details.readySpells}}</span>
+            </div>
+            <div>
+                <span>Invocations</span>
+                <span>{{decksCtrl.details.conjurations}}</span>
+            </div>
+            <div>
+                <span>Alliés</span>
+                <span>{{decksCtrl.details.allies}}</span>
+            </div>
+            <div>
+                <span>Unités</span>
+                <span>{{decksCtrl.details.units}}</span>
+            </div>
+            <div>
+                <span>Altérations</span>
+                <span>{{decksCtrl.details.alterations}}</span>
+            </div>
+        </div>
+        <div class="costs">
+            <div>
+                <span>Symbole</span>
+                <span>Coût à la pose</span>
+                <span>Coût des effets</span>
+                <span>Coût à la pose (main de départ)</span>
+                <span>Coût des effets (main de départ)</span>
+            </div>
+            <div ng-repeat="(key, elt) in decksCtrl.costs" class="{{key}}">
+                <span ng-bind-html="elt.symbol | cost | trust"></span>
+                <span>{{elt.playCost}}</span>
+                <span>{{elt.effectCost}}</span>
+                <span>{{elt.FFPlayCost}}</span>
+                <span>{{elt.FFEffectCost}}</span>
+            </div>
+        </div>
+    </div>
+</div>

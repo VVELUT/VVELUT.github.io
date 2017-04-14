@@ -1,0 +1,464 @@
+section {
+    height: 100%;
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    menu {
+        background-color: white;
+        position: fixed;
+        z-index:1;
+        border-bottom: 1px solid black;
+        left:0;
+        right:0;
+        top:0;
+        padding: 0;
+        font-size: 0;
+        display: flex;
+
+        a {
+            flex-grow: 1;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover,
+            &.active {
+                background-color: @secondary-color;
+            }
+        }
+    }
+
+    article {
+        max-width: @articleWidth;
+        margin: 0 auto;
+        height: calc(100% - 20px);
+        padding-top: 20px;
+
+        cards {
+            .filters {
+                background-color: white;
+                left: 0;
+                position: fixed;
+                right: 0;
+                text-align: center;
+                z-index: 1;
+                top: 19px;
+                border-bottom: 1px solid black;
+
+                #toggleFiltersDiv {
+
+                    &::before,
+                    &::after {
+                        content: "▼";
+                        padding: 0 10px;
+                    }
+
+                    #resetFilters {
+                        left: 0;
+                        position: absolute;
+                    }
+                }
+
+                #filtersContent{
+                    height: 160px;
+                    display: none;
+
+                    .filterList {
+                        .noscroll(200px, 160px);
+
+                        .filter {
+                            text-align: left;
+                            padding: 10px;
+                            .noselect;
+
+                            &.included {
+                                background-color: @positive-color;
+                            }
+                            &.excluded {
+                                background-color: @negative-color;
+                            }
+                        }
+                    }
+                }
+
+                &.open {
+                    #toggleFiltersDiv {
+
+                        &::before,
+                        &::after {
+                            content: "▲";
+                        }
+                    }
+                    #filtersContent{
+                        display: flex;
+                        justify-content: space-between;
+                        max-width: @articleWidth;
+                        margin: 0 auto;
+                    }
+                }
+            }
+            .cardsList {
+                margin-top: 19px;
+            }
+            .open + .cardsList {
+                margin-top: 179px;
+            }
+        }
+
+        decks {
+            font-size: 0;
+
+            .deck-panel{
+                width: 50%;
+                display: inline-block;
+                font-size: 16px;
+                height: 100%;
+                vertical-align: top;
+
+                &#dkp1 {
+                    overflow: scroll;
+                    > div {
+                        margin: 5px;
+                    }
+
+                    .deck {
+                        position: relative;
+                        border: 1px solid black;
+                        padding: 10px;
+                        cursor: pointer;
+
+                        .buttons {
+                            right: 10px;
+                        }
+                    }
+
+                    .import-file {
+                        cursor: pointer;
+                    }
+
+                    #loadDeckInput{
+                        display: none;
+                    }
+                }
+                &#dkp2 {
+                    background-color: @secondary-color;
+                    padding: 0 15px;
+                    width: calc(50% - 30px);
+
+                    > a{
+                        text-align: center;
+                        width: 100%;
+                        display: block;
+                    }
+                    #deckName {
+                        border: 0 none;
+                        display: block;
+                        margin: 3px auto;
+                        text-align: center;
+                        width: 100%;
+                    }
+
+                    .pb{
+                        height: 20px;
+                        position: relative;
+                    }
+                    .cards {
+                        margin: 10px 0;
+                        position: relative;
+
+
+                        .firstFive{
+                            font-weight: bold;
+                        }
+                        .linked {
+                            text-decoration: underline;
+                        }
+                    }
+                    .dice {
+                        margin-bottom: 10px;
+                        position: relative;
+                    }
+                }
+                &#dkp3 {
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    pb,
+                    card,
+                    die {
+                        margin: 0;
+                    }
+
+                    .details {
+                        border: 1px solid black;
+                        min-width: calc(230px - 10px);
+                        padding: 0 5px;
+
+                        > div {
+                            display: flex;
+                            justify-content: space-between;
+
+                            &.valid {
+                                color: @positive-color;
+                            }
+                            &.invalid {
+                                color: @negative-color;
+                            }
+                        }
+                    }
+
+                    .costs {
+                        display: flex;
+
+                        > div {
+                            display: flex;
+                            flex-direction: column;
+
+                            &:nth-of-type(1) {
+                                order: -4;
+                            }
+                            &:nth-of-type(n+2) {
+                                text-align: center;
+                            }
+
+                            &.P {
+                                order: -3;
+                            }
+                            &.S {
+                                order: -2;
+                            }
+                            &.D {
+                                order: -1;
+                            }
+                            &.B {
+                                order: 1;
+                            }
+                        }
+                        .img {
+                            padding: 0 11px 0;
+                        }
+                    }
+                }
+
+                .buttons{
+                    position: absolute;
+                    right: 0;
+                    display: inline-block;
+                    font-weight: normal;
+                    cursor: pointer;
+
+                    .noselect;
+                }
+            }
+
+            > div {
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
+        }
+
+        pb,
+        card,
+        die {
+            width: 230px;
+            height: 300px;
+            border: 1px solid black;
+            overflow: hidden;
+            margin: 4px 4px;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+
+            .name {
+                font-weight: 600;
+                text-align: center;
+                margin-top: 4px;
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+            .subtitle{
+                display: flex;
+                font-size: 12px;
+                justify-content: space-around;
+                margin-top: 2px;
+            }
+            .stat {
+                display: flex;
+                justify-content: space-around;
+            }
+            .effect {
+                font-size: 10px;
+                text-align: justify;
+                padding: 2px;
+
+                &.InEp{
+                    background-color: @secondary-color;
+                }
+
+                .img {
+                    padding: 0 16px 0 0;
+                }
+            }
+
+            .bottom-part,
+            invocation {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+            .hasInvocation {
+                > .bottom-part{
+                    bottom: 25px;
+                }
+
+                &:hover > invocation {
+                    height: calc(100% - 25px);
+
+                    > div > .top-part,
+                    > div > .bottom-part,
+                    > div > invocation {
+                        display: initial;
+                    }
+
+                }
+
+                invocation {
+                    width: 100%;
+                    background-color: white;
+                    border-top: 1px solid black;
+
+
+                    > div > .top-part,
+                    > div > .bottom-part {
+                        display: none;
+                    }
+
+                    > div > invocation {
+                        display: none;
+                    }
+
+                }
+
+            }
+
+            > div {
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
+        }
+
+        pb {
+            .stat {
+                margin-bottom: 20px;
+            }
+            invocation {
+                .stat {
+                    margin: initial;
+                }
+            }
+        }
+
+        card,
+        die {
+            .icons {
+                text-align: center;
+                padding-top: 10px;
+            }
+        }
+
+        card {
+            .icons {
+                .img {
+                    padding: 0 12px 0;
+                    margin: 0 16px 0 0;
+                }
+            }
+        }
+        die {
+            .icons {
+                .img {
+                    padding: 0 12px 8px;
+                    margin: 0 16px 0 0;
+                }
+            }
+        }
+
+        .img {
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+            &.P {
+                background-image: url('img/P.png');
+            }
+            &.S {
+                background-image: url('img/S.png');
+            }
+            &.B {
+                background-image: url('img/B.png');
+            }
+            &.D {
+                background-image: url('img/D.png');
+            }
+            &.E {
+                background-image: url('img/E.png');
+            }
+            &.CD {
+                background-image: url('img/CD.png');
+            }
+            &.CE {
+                background-image: url('img/CE.png');
+            }
+            &.CI {
+                background-image: url('img/CI.png');
+            }
+            &.CN {
+                background-image: url('img/CN.png');
+            }
+            &.CR {
+                background-image: url('img/CR.png');
+            }
+            &.CS {
+                background-image: url('img/CS.png');
+            }
+            &.PD {
+                background-image: url('img/PD.png');
+            }
+            &.PE {
+                background-image: url('img/PE.png');
+            }
+            &.PI {
+                background-image: url('img/PI.png');
+            }
+            &.PN {
+                background-image: url('img/PN.png');
+            }
+            &.PR {
+                background-image: url('img/PR.png');
+            }
+            &.PS {
+                background-image: url('img/PS.png');
+            }
+        }
+    }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+html {
+    overflow-y: scroll; //force scroll bar, to prevent jumps when switching page
+}
+
+@import "common.less";

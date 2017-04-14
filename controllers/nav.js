@@ -3,7 +3,7 @@ app.controller('navController',function($location,$anchorScroll){
 
     this.scroll = function(tab,hash,$event){
         $event.stopPropagation();
-        if(tab == 2 && window.innerWidth > 967) $anchorScroll.yOffset = 45;
+        if(tab == 2) $anchorScroll.yOffset = 45;
         else $anchorScroll.yOffset = 25;
         this.tab = tab;
         $location.hash(hash);

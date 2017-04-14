@@ -38,7 +38,7 @@ function locationOf(element, array, start, end) {
         case 0: return pivot;
         case 1: return locationOf(element, array, pivot, end);
     };
-};
+}
 
 function pushSort(element, array){
     array.splice(locationOf(element, array) + 1, 0, element);
@@ -48,7 +48,7 @@ function pushSort(element, array){
 function findById(arr, id){
     id = parseInt(id);
     return $.grep(arr,function(e){return e.id === id})[0];
-};
+}
 
 function maxId(arr){
     var max = 0;
@@ -59,26 +59,31 @@ function maxId(arr){
     return max;
 }
 
-function arrayContains(arr1, arr2){
-    if(arr2.length < arr1.length) return false;
+function arrayContains(filters, tags){
+    if(tags.length < filters.length) return false;
     var i = 0, j = 0;
-    while( i < arr1.length && j < arr2.length){
-        if(parseInt(arr1[i]) == parseInt(arr2[j])){
+    while( i < filters.length && j < tags.length){
+        if(parseInt(filters[i]) == parseInt(tags[j])){
             i++;j++;
-        } else if (parseInt(arr1[i]) < parseInt(arr2[j])) {
+        } else if (parseInt(filters[i]) < parseInt(tags[j])) {
             return false;
         } else {
             j++;
         }
     }
-    return i == arr1.length;
+    return i == filters.length;
 }
 
-var wipDeck = {
-    id: 0,
-    name: "",
-    pB: null,
-    cards: {},
-    dice: {},
-    firstFive: [],
+function arrayDiffers(filters, tags){
+    var i = 0, j = 0;
+    while( i < filters.length && j < tags.length){
+        if(parseInt(filters[i]) == parseInt(tags[j])){
+            return false;
+        } else if (parseInt(filters[i]) < parseInt(tags[j])) {
+            i++;
+        } else {
+            j++;
+        }
+    }
+    return true;
 }

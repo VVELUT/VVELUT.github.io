@@ -5,17 +5,30 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Ashes - Liste des cartes</title>
 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+        <script>
+          less = {
+              strictMath: true
+          };
+        </script>
+        <link rel="stylesheet/less" type="text/css" href="style.less" />
+        <script src="lib/less.js" type="text/javascript"></script>
+
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
         <script type="text/javascript" src="app.js"></script>
 
         <script type="text/javascript" src="controllers/nav.js"></script>
-        <script type="text/javascript" src="controllers/deck.js"></script>
-        <script type="text/javascript" src="controllers/pb.js"></script>
-        <script type="text/javascript" src="controllers/card.js"></script>
-        <script type="text/javascript" src="controllers/die.js"></script>
+
+        <script type="text/javascript" src="directives/pbs.js"></script>
+        <script type="text/javascript" src="directives/cards.js"></script>
+        <script type="text/javascript" src="directives/dice.js"></script>
+        <script type="text/javascript" src="directives/decks.js"></script>
+        <script type="text/javascript" src="directives/pb.js"></script>
+        <script type="text/javascript" src="directives/card.js"></script>
+        <script type="text/javascript" src="directives/die.js"></script>
+        <script type="text/javascript" src="directives/invocation.js"></script>
 
         <script type="text/javascript" src="filters/cost.js"></script>
         <script type="text/javascript" src="filters/trust.js"></script>
@@ -29,286 +42,26 @@
         <script type="text/javascript" src="data/tags.js"></script>
     </head>
     <body>
-        <section ng-controller="navController as navCtrl">
-            <ul>
-                <li ng-class="{ active:navCtrl.isSet(1) }">
-                    <a href="" ng-click="navCtrl.setTab(1)">
-                        Héritiers
-                    </a>
-                </li>
-                <li ng-class="{ active:navCtrl.isSet(2) }">
-                    <a href="" ng-click="navCtrl.setTab(2)">
-                        Cartes
-                    </a>
-                </li>
-                <li ng-class="{ active:navCtrl.isSet(3) }">
-                    <a href="" ng-click="navCtrl.setTab(3)">
-                        Dés
-                    </a>
-                </li>
-                <li id="nav-deck" ng-class="{ active:navCtrl.isSet(4) }">
-                    <a href="" ng-click="navCtrl.setTab(4)">
-                        Deck
-                    </a>
-                </li>
-            </ul>
+        <section ng-controller="navController as navCtrl" ng-cloak>
+            <menu>
+                <a href="" ng-click="navCtrl.setTab(1)" ng-class="{ active:navCtrl.isSet(1) }">
+                    Héritiers
+                </a>
+                <a href="" ng-click="navCtrl.setTab(2)" ng-class="{ active:navCtrl.isSet(2) }">
+                    Cartes
+                </a>
+                <a href="" ng-click="navCtrl.setTab(3)" ng-class="{ active:navCtrl.isSet(3) }">
+                    Dés
+                </a>
+                <a href="" ng-click="navCtrl.setTab(4)" ng-class="{ active:navCtrl.isSet(4) }">
+                    Decks
+                </a>
+            </menu>
             <article>
-                <div class="PhoenixBorns" ng-show="navCtrl.isSet(1)" ng-controller="PBController as PBCtrl">
-                    <div ng-repeat="pB in PBCtrl.pBs | localeCompareString" id="PB{{pB.id}}" class="card phoenixBorn" ng-class="{ hasInvocation:pB.invocation.name }" ng-click="PBCtrl.addToDeck(pB)">
-                        <div class="name">
-                            <a href="" title="{{pB.linkedCardName}}" ng-click="navCtrl.scroll(2, 'C'+pB.linkedCardId,$event)">
-                                {{pB.name}}
-                            </a>
-                        </div>
-                        <div class="bottom-part">
-                            <div class="pStat">
-                                <span class="battlefield">{{pB.battlefield}}</span>
-                                <span class="life">{{pB.life}}</span>
-                                <span class="spellbook">{{pB.spellbook}}</span>
-                            </div>
-                            <div class="effect" ng-repeat="effect in pB.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                        </div>
-                        <div class="invocation" ng-show="pB.invocation">
-                            <div class="name">{{pB.invocation.name}}</div>
-                            <div class="inv-top-part">
-                                <div class="subtitle">
-                                    <span class="type">{{pB.invocation.type}}</span>
-                                    <span class="zone">{{pB.invocation.placement}}</span>
-                                </div>
-                            </div>
-                            <div class="inv-bottom-part">
-                                <div class="effect" ng-repeat="effect in pB.invocation.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                <div class="cStat">
-                                    <span class="attack">{{pB.invocation.attack}}</span>
-                                    <span class="life">{{pB.invocation.life}}</span>
-                                    <span class="recover">{{pB.invocation.recover}}</span>
-                                    <span class="number">{{pB.invocation.number}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="Cards" ng-show="navCtrl.isSet(2)" ng-controller="CardController as CardCtrl">
-                    <div class="filters" ng-class="{ open: CardCtrl.areFiltersOpen}">
-                        <div id="filtersContent">
-                            <div class="filterList-out" ng-repeat="(name, tagList) in CardCtrl.tags">
-                                <div class="filterList-in" >
-                                    <div class="filterList">
-                                        <div class="filter" ng-repeat="tag in tagList" ng-click="CardCtrl.switchFilter(tag)" ng-class="{active: CardCtrl.isSelected(tag) }">
-                                            {{ CardCtrl.allTags[tag] }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="toggleFiltersDiv" ng-click="CardCtrl.areFiltersOpen = !CardCtrl.areFiltersOpen"><span id="resetFilters" ng-click="CardCtrl.resetFilters(); $event.stopPropagation()">&#8634;</span>Filtres</div>
-                    </div>
-                    <div class="cardsList">
-                        <div ng-repeat="card in CardCtrl.cards | localeCompareString" id="C{{card.id}}" class="card {card.type}" ng-class="{ hasInvocation:card.invocation.name }" ng-click="CardCtrl.addToDeck(card)">
-                            <div class="name">
-                                <a href="" title="{{card.linkedPBName}}" ng-if="card.linkedPBId" ng-click="navCtrl.scroll(1, 'PB'+card.linkedPBId, $event)">
-                                    {{card.name}}
-                                </a>
-                                <span ng-if="!card.linkedPBId">
-                                    {{card.name}}
-                                </span>
-                            </div>
-                            <div class="top-part">
-                                <div class="subtitle">
-                                        <span class="type">{{card.type}}</span>
-                                        <span class="zone">{{card.placement}}</span>
-                                    </div>
-                                <div class="cost icons" ng-bind-html="card.cost | cost | trust"></div>
-                            </div>
-                            <div class="bottom-part">
-                                <div class="effect" ng-repeat="effect in card.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                <div class="cStat" ng-show="card.attack || card.life || card.recover">
-                                    <span class="attack">{{card.attack}}</span>
-                                    <span class="life">{{card.life}}</span>
-                                    <span class="recover">{{card.recover}}</span>
-                                </div>
-                            </div>
-                            <div class="invocation" ng-show="card.invocation">
-                                <div class="name">{{card.invocation.name}}</div>
-                                <div class="inv-top-part">
-                                    <div class="subtitle">
-                                        <span class="type">{{card.invocation.type}}</span>
-                                        <span class="zone">{{card.invocation.placement}}</span>
-                                    </div>
-                                </div>
-                                <div class="inv-bottom-part">
-                                    <div class="effect" ng-repeat="effect in card.invocation.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                    <div class="cStat">
-                                        <span class="attack">{{card.invocation.attack}}</span>
-                                        <span class="life">{{card.invocation.life}}</span>
-                                        <span class="recover">{{card.invocation.recover}}</span>
-                                        <span class="number">{{card.invocation.number}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="Dice" ng-show="navCtrl.isSet(3)" ng-controller="DieController as DieCtrl">
-                    <div  ng-repeat="die in DieCtrl.dice | localeCompareString" id="D{{die.id}}" class="die" ng-click="DieCtrl.addToDeck(die)">
-                        <div class="name">{{die.name}}</div>
-                        <div class="icons" ng-bind-html="die.icons | cost | trust"></div>
-                        <div class="bottom-part">
-                            <div class="effect" ng-bind-html="die.effect | cost | trust"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="Decks" ng-show="navCtrl.isSet(4)" ng-controller="DeckController as DeckCtrl">
-                    <div id="dkp1" class="deck-panel" ng-hide="DeckCtrl.showCards()">
-                        <div class="deck" ng-mouseover="DeckCtrl.loadDeck(DeckCtrl.wipDeck(),0)" ng-click="DeckCtrl.change()" ng-show="!DeckCtrl.isWipEmpty()">
-                            Deck en cours
-                            <div class="buttons">
-                                <a ng-click="DeckCtrl.resetWipDeck(); $event.stopPropagation();">×</a>
-                            </div>
-                        </div>
-                        <div>Decks construits :
-                            <label class="import-file">
-                                <input type="file" id="loadDeckInput" on-read-file="showContent($fileContent)"/>
-                                <span>Charger</span>
-                            </label>
-                            <a id="download-link" download="decks.txt" href="" ng-click="DeckCtrl.download()">Sauvegarder</a>
-                        </div>
-                        <div ng-repeat="deck in decks | reverse" class="deck" ng-mouseover="DeckCtrl.loadDeck(deck,1)" ng-click="DeckCtrl.change()">
-                            {{ deck.name }}
-                            <div class="buttons">
-                                <a ng-click="DeckCtrl.deleteDeck(deck); $event.stopPropagation();">×</a>
-                            </div>
-                        </div>
-                        <div>Decks préconstruits :</div>
-                        <div ng-repeat="deck in DeckCtrl.decksPreconstruits | reverse" class="deck" ng-mouseover="DeckCtrl.loadDeck(deck,2)" ng-click="DeckCtrl.change()">
-                            {{ deck.name }}
-                        </div>
-                    </div>
-                    <div id="dkp2" class="deck-panel">
-                        <a href="" ng-click="DeckCtrl.change()">
-                            {{ DeckCtrl.text }}
-                        </a>
-                        <input type="text" id="deckName" placeholder="Nom du deck" ng-show="DeckCtrl.typeLoaded == 0" ng-model="DeckCtrl.name"/>
-                        <div class="pB" ng-mouseover="DeckCtrl.loadDetail('pB',DeckCtrl.pB)">
-                            {{ DeckCtrl.pB.name }}
-                            <div class="buttons" ng-show="DeckCtrl.typeLoaded == 0">
-                                <span>
-                                    Cartes : {{ DeckCtrl.cardsCpt }} |
-                                    Dés : {{ DeckCtrl.diceCpt }}</span>
-                            </div>
-                        </div>
-                        <div class="cards">
-                            <div class="card" ng-class="{ linked: card.card.linkedPBId, firstFive: card.first }" ng-repeat="card in DeckCtrl.cards|localeCompareString" ng-mouseover="DeckCtrl.loadDetail('card',card.card)">
-                                {{ card.number }} x {{ card.card.name }}
-                                <div class="buttons noselect" ng-show="DeckCtrl.typeLoaded == 0">
-                                    <a ng-click="DeckCtrl.cardFive(card)">5</a>
-                                    <a ng-click="DeckCtrl.cardMinus(card)">-</a>
-                                    <a ng-click="DeckCtrl.cardPlus(card)">+</a>
-                                    <a ng-click="DeckCtrl.cardDelete(card)">×</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dice">
-                            <div class="die" ng-repeat="die in DeckCtrl.dice" ng-mouseover="DeckCtrl.loadDetail('die',die.die)">
-                                {{ die.number }} x {{ die.die.name }}
-                                <div class="buttons noselect" ng-show="DeckCtrl.typeLoaded == 0">
-                                    <a ng-click="DeckCtrl.dieMinus(die)">-</a>
-                                    <a ng-click="DeckCtrl.diePlus(die)">+</a>
-                                    <a ng-click="DeckCtrl.dieDelete(die)">×</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="save" ng-show="DeckCtrl.wipIsValid()">
-                            <a id="saveButton" ng-click="DeckCtrl.save()">Sauvegarder</a>
-                        </div>
-                        <div class="edit" ng-show="DeckCtrl.typeLoaded == 1">
-                            <a id="editButton" ng-click="DeckCtrl.copy(true)">Modifier</a>
-                        </div>
-                        <div class="copy" ng-show="DeckCtrl.typeLoaded">
-                            <a id="copyButton" ng-click="DeckCtrl.copy(false)">Copier</a>
-                        </div>
-                    </div>
-                    <div id="dkp3" class="deck-panel" ng-show="DeckCtrl.showCards()">
-                        <div id="detail">
-                            <div class="card phoenixBorn" ng-class="{ hasInvocation:DeckCtrl.detail.elt.invocation.name }" ng-show="DeckCtrl.detail.type == 'pB'">
-                                <div class="name">
-                                    {{DeckCtrl.detail.elt.name}}
-                                </div>
-                                <div class="bottom-part">
-                                    <div class="pStat">
-                                        <span class="battlefield">{{DeckCtrl.detail.elt.battlefield}}</span>
-                                        <span class="life">{{DeckCtrl.detail.elt.life}}</span>
-                                        <span class="spellbook">{{DeckCtrl.detail.elt.spellbook}}</span>
-                                    </div>
-                                    <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                </div>
-                                <div class="invocation" ng-show="DeckCtrl.detail.elt.invocation">
-                                    <div class="name">{{DeckCtrl.detail.elt.invocation.name}}</div>
-                                    <div class="inv-top-part">
-                                        <div class="subtitle">
-                                            <span class="type">{{DeckCtrl.detail.elt.invocation.type}}</span>
-                                            <span class="zone">{{DeckCtrl.detail.elt.invocation.placement}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="inv-bottom-part">
-                                        <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.invocation.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                        <div class="cStat">
-                                            <span class="attack">{{DeckCtrl.detail.elt.invocation.attack}}</span>
-                                            <span class="life">{{DeckCtrl.detail.elt.invocation.life}}</span>
-                                            <span class="recover">{{DeckCtrl.detail.elt.invocation.recover}}</span>
-                                            <span class="number">{{DeckCtrl.detail.elt.invocation.number}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card {DeckCtrl.detail.elt.type}" ng-class="{ hasInvocation:DeckCtrl.detail.elt.invocation.name }" ng-show="DeckCtrl.detail.type == 'card'">
-                                <div class="name">
-                                    {{DeckCtrl.detail.elt.name}}
-                                </div>
-                                <div class="top-part">
-                                    <div class="subtitle">
-                                            <span class="type">{{DeckCtrl.detail.elt.type}}</span>
-                                            <span class="zone">{{DeckCtrl.detail.elt.placement}}</span>
-                                        </div>
-                                    <div class="cost icons" ng-bind-html="DeckCtrl.detail.elt.cost | cost | trust"></div>
-                                </div>
-                                <div class="bottom-part">
-                                    <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                    <div class="cStat" ng-show="DeckCtrl.detail.elt.attack || DeckCtrl.detail.elt.life || DeckCtrl.detail.elt.recover">
-                                        <span class="attack">{{DeckCtrl.detail.elt.attack}}</span>
-                                        <span class="life">{{DeckCtrl.detail.elt.life}}</span>
-                                        <span class="recover">{{DeckCtrl.detail.elt.recover}}</span>
-                                    </div>
-                                </div>
-                                <div class="invocation" ng-show="DeckCtrl.detail.elt.invocation">
-                                    <div class="name">{{DeckCtrl.detail.elt.invocation.name}}</div>
-                                    <div class="inv-top-part">
-                                        <div class="subtitle">
-                                            <span class="type">{{DeckCtrl.detail.elt.invocation.type}}</span>
-                                            <span class="zone">{{DeckCtrl.detail.elt.invocation.placement}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="inv-bottom-part">
-                                        <div class="effect" ng-repeat="effect in DeckCtrl.detail.elt.invocation.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
-                                        <div class="cStat">
-                                            <span class="attack">{{DeckCtrl.detail.elt.invocation.attack}}</span>
-                                            <span class="life">{{DeckCtrl.detail.elt.invocation.life}}</span>
-                                            <span class="recover">{{DeckCtrl.detail.elt.invocation.recover}}</span>
-                                            <span class="number">{{DeckCtrl.detail.elt.invocation.number}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div  class="die" ng-show="DeckCtrl.detail.type == 'die'">
-                                <div class="name">{{DeckCtrl.detail.elt.name}}</div>
-                                <div class="icons" ng-bind-html="DeckCtrl.detail.elt.icons | cost | trust"></div>
-                                <div class="bottom-part">
-                                    <div class="effect" ng-bind-html="DeckCtrl.detail.elt.effect | cost | trust"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <pbs ng-show="navCtrl.isSet(1)"></pbs>
+                <cards ng-show="navCtrl.isSet(2)"></cards>
+                <dice ng-show="navCtrl.isSet(3)"></dice>
+                <decks ng-show="navCtrl.isSet(4)"></decks>
             </article>
         </section>
     </body>

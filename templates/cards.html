@@ -1,0 +1,19 @@
+<div>
+    <div class="filters" ng-class="{ open: cardsCtrl.areFiltersOpen}">
+        <div id="filtersContent">
+            <div class="filterList-out" ng-repeat="tagList in cardsCtrl.tags">
+                <div class="filterList-in" >
+                    <div class="filterList">
+                        <div class="filter" ng-repeat="tag in tagList" ng-click="cardsCtrl.switchFilter(tag)" ng-class="cardsCtrl.tagStatus(tag)">
+                            {{ cardsCtrl.allTags[tag] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="toggleFiltersDiv" ng-click="cardsCtrl.areFiltersOpen = !cardsCtrl.areFiltersOpen"><span id="resetFilters" ng-click="cardsCtrl.resetFilters(); $event.stopPropagation()">&#8634;</span>Filtres</div>
+    </div>
+    <div class="cardsList">
+        <card id="C{{cardCtrl.card.id}}" ng-repeat="card in cardsCtrl.cards | localeCompareString" card="card" ng-click="cardsCtrl.addToDeck(card)" ng-show="cardsCtrl.checkTags(card)"></card>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div ng-class="{ hasInvocation:pbCtrl.pb.invocation.name }">
+    <div class="name">
+        <a href="" title="{{pbCtrl.pb.linkedCardName}}" ng-click="navCtrl.scroll(2, 'C'+pbCtrl.pb.linkedCardId, $event)">
+            {{pbCtrl.pb.name}}
+        </a>
+    </div>
+    <div class="bottom-part">
+        <div class="stat">
+            <span class="battlefield">{{pbCtrl.pb.battlefield}}</span>
+            <span class="life">{{pbCtrl.pb.life}}</span>
+            <span class="spellbook">{{pbCtrl.pb.spellbook}}</span>
+        </div>
+        <div class="effect" ng-repeat="effect in pbCtrl.pb.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
+    </div>
+    <invocation ng-if="pbCtrl.pb.invocation" invocation="pbCtrl.pb.invocation"></invocation>
+</div>

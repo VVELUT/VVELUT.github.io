@@ -1,3 +1,19 @@
+Un peu plus loin
+* Liste des éléments à emporter
+
+2.3.5
+* Découpe des fichiers (suite et fin)
+* Ajout des premiers éléments de Namine et Odette
+* Nettoyage de la BDD
+* L'affichage avant le chargement ne montre plus de fragments techniques
+* Correction d'un bug sur le nom du deck en cours de travail
+* Ajout de filtres en exclusion
+* Ajout de statistiques d'un deck
+* La liste des decks ne brise plus la page lorsqu'elle est trop longue
+* Passage en less
+* Directive invocation
+* Ajout de statistiques liées au coût d'un deck
+
 2.2.4
 * Découpe en fichiers (en cours)
 * Traduction de Léo et Victoria

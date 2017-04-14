@@ -1,0 +1,32 @@
+@secondary-color: #dddddd;
+@positive-color: #32CD32;
+@negative-color: #B0171F;
+
+@articleWidth: 968px;
+
+.noselect() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.noscroll(@width, @height) {
+    &-out {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+    }
+    &-out,
+    & {
+        width: @width;
+        height: @height;
+    }
+    &-in {
+        position: absolute;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}

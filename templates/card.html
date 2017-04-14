@@ -1,0 +1,26 @@
+<div ng-class="{ hasInvocation:cardCtrl.card.invocation.name }">
+    <div class="name">
+        <a href="" title="{{cardCtrl.card.linkedPbName}}" ng-if="cardCtrl.card.linkedPbId" ng-click="navCtrl.scroll(1, 'PB'+cardCtrl.card.linkedPbId, $event)">
+            {{cardCtrl.card.name}}
+        </a>
+        <span ng-if="!cardCtrl.card.linkedPbId">
+            {{cardCtrl.card.name}}
+        </span>
+    </div>
+    <div class="top-part">
+        <div class="subtitle">
+                <span class="type">{{cardCtrl.card.type}}</span>
+                <span class="zone">{{cardCtrl.card.placement}}</span>
+            </div>
+        <div class="icons" ng-bind-html="cardCtrl.card.cost | cost | trust"></div>
+    </div>
+    <div class="bottom-part">
+        <div class="effect" ng-repeat="effect in cardCtrl.card.effects" ng-bind-html="effect.effect | cost | trust" ng-class="effect.type"></div>
+        <div class="stat" ng-show="cardCtrl.card.attack || cardCtrl.card.life || cardCtrl.card.recover">
+            <span class="attack">{{cardCtrl.card.attack}}</span>
+            <span class="life">{{cardCtrl.card.life}}</span>
+            <span class="recover">{{cardCtrl.card.recover}}</span>
+        </div>
+    </div>
+    <invocation ng-if="cardCtrl.card.invocation" invocation="cardCtrl.card.invocation"></invocation>
+</div>
